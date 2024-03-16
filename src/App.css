@@ -21,3 +21,20 @@ body {
   background-color: black;
   opacity: 0.5;
 }
+
+.circleLine {
+  position: relative;
+}
+.circleLine::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  transform: translate(-50%, 50%);
+  aspect-ratio: 1/1;
+  width: 281px;
+  height: auto;
+  background-image: url("./assets/images/Top/img_circle.png");
+  background-repeat: no-repeat;
+  z-index: 1;
+}

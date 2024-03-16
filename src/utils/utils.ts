@@ -1,7 +1,7 @@
 import clsx, { ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { ObjectSchema, object, string } from "yup";
-import { FieldConfig } from "../components/form/Form";
+import { FieldConfig } from "../components/Form/Form";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -57,8 +57,8 @@ export const setUpForm = (formType: string | undefined): any => {
       };
       return { initialValues, validationSchema, fields };
     }
-    case "careGiver":
-      return object({});
+    case "careGiver": {
+    }
     case "donator":
       return object({
         // Define validation schema for type3 form

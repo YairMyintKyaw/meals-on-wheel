@@ -11,9 +11,7 @@ const App = () => {
     cn("text", { "text-center": true })
   })
   return (
-    <>
-      <View />
-    </>
+    <View />
   );
 };
 

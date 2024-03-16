@@ -1,6 +1,6 @@
 import { ObjectSchema, object, string } from "yup";
 import AuthLayout from "../../components/Layout/AuthLayout"
-import RegisterForm, { FieldConfig } from "../../components/form/Form";
+import RegisterForm, { FieldConfig } from "../../components/Form/Form";
 import { Field } from "formik";
 import { Link } from "react-router-dom";
 

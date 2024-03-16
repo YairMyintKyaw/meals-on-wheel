@@ -1,0 +1,24 @@
+.textBlock::before {
+  content: "";
+  width: 8px;
+  height: 100%;
+  @apply bg-green-800;
+  position: absolute;
+  left: -26px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.rotate_infinite {
+  animation: rotate 15s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

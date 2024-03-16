@@ -1,0 +1,24 @@
+.navigation li:has(.active) {
+  position: relative;
+  @apply text-green-800;
+}
+.navigation li:has(.active)::after {
+  content: "";
+  width: 8.33px;
+  height: 8.33px;
+  border-radius: 50%;
+  @apply bg-green-800;
+  position: absolute;
+  left: -11.33px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+.dropdown li::after {
+  content: none !important;
+}
+
+.dropdown li:has(.active) {
+  @apply bg-green-800 text-white;
+}
