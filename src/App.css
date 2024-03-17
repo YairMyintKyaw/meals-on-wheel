@@ -54,9 +54,6 @@ body {
   height: auto;
   background-image: url("./assets/images/img_arrow.png");
   background-repeat: no-repeat;
-  @media screen and (max-width: 1024px) {
-    right: 0;
-  }
 }
 
 @media screen and (max-width: 1024px) {
