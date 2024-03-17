@@ -1,0 +1,23 @@
+.back-button::before {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url("../../assets/images/img_back.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.back-button:hover::before {
+  animation: hoverArrow 0.4s 2 ease-out;
+}
+
+@keyframes hoverArrow {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-10px);
+  }
+}
