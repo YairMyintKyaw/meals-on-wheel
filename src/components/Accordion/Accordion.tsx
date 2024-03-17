@@ -32,7 +32,7 @@ const Accordion: React.FC<Props> = ({ data }) => {
         <section className="flex flex-col gap-3 ">
             {qAndA?.map(({ question, answer, isOpen }, index) =>
                 <div key={index} className=" relative overflow-hidden w-full shadow-lg  bg-white rounded-lg">
-                    <button data-id={index} onClick={handleClick} className={cn("w-full font-semibold text-start relative z-10 ps-4 pr[15px] py-5 text-neutral-800", { "text-green-800": isOpen })}>{question}</button>
+                    <button data-id={index} onClick={handleClick} className={cn("w-full font-semibold text-start relative z-10 ps-4 pr[15px] py-5 text-neutral-800 hover:text-green-800", { "text-green-800": isOpen })}>{question}</button>
                     <p className={cn("hidden px-4 pb-5", { "flex": isOpen })}>{answer}</p>
                     <Image Img={Close} width={24} height={24} className={cn("absolute top-[20px] right-[10px]  max-w-[24px]", { "opacity-0": isOpen })} />
                     <Image Img={Open} width={24} height={24} className={cn("absolute top-[20px] right-[10px]  max-w-[24px]", { "opacity-0": !isOpen })} />

@@ -34,7 +34,36 @@ body {
   aspect-ratio: 1/1;
   width: 281px;
   height: auto;
-  background-image: url("./assets/images/Top/img_circle.png");
+  background-image: url("./assets/images/img_circle.png");
   background-repeat: no-repeat;
-  z-index: 1;
+  z-index: -1;
+}
+
+.arrow {
+  position: relative;
+}
+
+.arrow::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 10%;
+  transform: translate(50%, -60%);
+  aspect-ratio: 109/131;
+  width: 109px;
+  height: auto;
+  background-image: url("./assets/images/img_arrow.png");
+  background-repeat: no-repeat;
+  @media screen and (max-width: 1024px) {
+    right: 0;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .circleLine::before {
+    left: 0;
+  }
+  .arrow::after {
+    right: 0;
+  }
 }
