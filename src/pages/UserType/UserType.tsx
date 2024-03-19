@@ -1,5 +1,4 @@
 import { Link, useNavigate } from "react-router-dom"
-import MainLayout from "../../components/Layout/MainLayout"
 import Button from "../../components/Button/Button"
 import Img from "../../assets/images/img_logo00.png"
 

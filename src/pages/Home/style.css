@@ -52,6 +52,18 @@
   animation: pulse 0.5s ease-in-out 3;
 }
 
+@media screen and (max-width: 900px) {
+  .hideInSp {
+    display: none;
+  }
+  .footer h2::after {
+    transform: translate(0%, 100%);
+  }
+  .footer h2::before {
+    transform: translate(0%, -100%);
+  }
+}
+
 @keyframes rotate {
   0% {
     transform: rotate(0);

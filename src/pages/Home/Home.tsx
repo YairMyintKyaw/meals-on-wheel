@@ -18,6 +18,8 @@ import Smile from "../../assets/images/Top/img_smiley.png"
 import Users from "../../assets/images/Top/img_users.png"
 import Accordion, { FAQ_type } from "../../components/Accordion/Accordion";
 import Button from "../../components/Button/Button";
+import PageLayout from "../../components/Layout/PageLayout";
+import Footer from "../../components/Footer/Footer";
 
 const numbers: NumberData[] = [
   {
@@ -64,9 +66,8 @@ export default function Home() {
   const user = useSelector((state: RootState) => state.user);
 
   return (
-
     <>
-      <MainLayout>
+      <PageLayout isFooter={false}>
         <div className="kv mt-[56px]">
           <Image Img={KV} width={1360} height={473} object="center" />
         </div>
@@ -142,14 +143,15 @@ export default function Home() {
             <Accordion data={FAQ_data} />
           </div>
         </section>
-      </MainLayout>
+      </PageLayout>
       <section className="footer pt-56 pb-20 w-full text-center mt-[144px]">
-        <div className="relative w-fit mx-auto text-white">
+        <div className="relative w-fit mx-auto text-white px-1 lg:px-0">
           <span className="text-xl font-medium text-end absolute right-0 -top-4">Begin with a single step towards kindness.</span>
-          <h2 className="text-9xl text-center ">Become a part <br /> of the future</h2>
+          <h2 className="text-8xl md:text-9xl text-center">Become a part <br className="hideInSp" /> of the future</h2>
         </div>
         <Button buttonType="secondary" className="text-white w-fit mx-auto mt-[73px]">Join With Us</Button>
       </section>
+      <Footer />
     </>
   )
 }
