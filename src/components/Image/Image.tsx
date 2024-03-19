@@ -7,12 +7,17 @@ type Props = {
     height: number,
     className?: string,
     object?: "center" | "left" | "right"
+    isContain?: boolean
 }
 
-const Image: React.FC<Props> = ({ Img, width, height, className, object }) => {
+const Image: React.FC<Props> = ({ Img, width, height, className, object, isContain = false }) => {
     return (
         <figure className={cn(`aspect-[${width}/${height}] w-full h-auto overflow-hidden`, className)}>
-            <img className={cn("w-full h-full object-contain", { "object-center": object === "center" }, { "object-left": object === "left" }, { "object-right": object === "right" })} src={Img} alt="" />
+            <img className={cn("w-full h-full object-cover",
+                { "object-center": object === "center" },
+                { "object-left": object === "left" },
+                { "object-right": object === "right" },
+                { "object-contain": isContain })} src={Img} alt="" />
         </figure>
     )
 }

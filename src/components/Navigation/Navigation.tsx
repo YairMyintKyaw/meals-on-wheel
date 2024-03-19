@@ -4,6 +4,7 @@ import Button from "../Button/Button";
 import "./style.css"
 import { useState } from "react";
 import { cn } from "../../utils/utils";
+import { GiHamburgerMenu } from "react-icons/gi";
 const Navigation = () => {
   const [isDropdownActive, setIsDropdownActive] = useState(false)
   const handleClick = () => {
@@ -14,7 +15,7 @@ const Navigation = () => {
       <figure className="aspect-[163/52] w-full h-auto max-w-[163px]"><img src={Logo} className="w-full h-full object-contain" alt="" /></figure>
     </NavLink>
     <nav className="flex items-center navigation">
-      <ul className="flex items-center justify-center gap-[24px]">
+      <ul className=" hidden nav:flex items-center justify-center gap-[24px]">
         <li className="text-black text-[16px] font-[500] transition ease-out hover:text-green-800"><NavLink to={"/"}>Home</NavLink></li>
         <li className="relative text-black text-[16px] font-[500] transition ease-out hover:text-green-800">
           <button id="dropdownTakeAction" onClick={handleClick} data-dropdown-toggle="dropdown" className="flex items-center" type="button">
@@ -47,11 +48,17 @@ const Navigation = () => {
         <li className="text-black text-[16px] font-[500] transition ease-out hover:text-green-800"><NavLink to={"/news_and_blogs"}>News & Blogs</NavLink></li>
       </ul>
     </nav>
-    <div className="flex gap-2 items-center">
+    <div className="hidden nav:flex gap-2 items-center">
       <Button buttonType="secondary">Sign in</Button>
       <Button buttonType="secondary--green">Sign in</Button>
+    </div>
+    <div className="flex nav:hidden items-center">
+      <button>
+        <GiHamburgerMenu className="text-2xl text-green-800" /></button>
     </div>
   </header>;
 };
 
 export default Navigation;
+
+

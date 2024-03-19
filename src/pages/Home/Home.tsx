@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store";
-import MainLayout from "../../components/Layout/MainLayout";
 import "./style.css";
 import NumberList, { NumberData } from "../../components/Number/Number";
 import Text from "../../components/Text/Text";
@@ -106,8 +105,8 @@ export default function Home() {
                 <Button buttonType="secondary--green" className="w-fit">Donate Now</Button>
               </div>
               <div className="flex-1 relative">
-                <Image Img={Nurse} width={480} height={510} object="center" className="h-full rounded-[30px] rounded-br-[56px]" />
-                <Image Img={CTA} width={142} height={142} object="center" className="absolute bottom-0 right-0 max-w-[115px] rotate_infinite" />
+                <Image Img={Nurse} width={480} height={510} object="center" className="h-full rounded-[30px] rounded-br-[38px] lg:rounded-br-[56px]" />
+                <Image Img={CTA} width={142} height={142} object="center" className="absolute bottom-0 right-0 max-w-[75px] lg:max-w-[115px] rotate_infinite" />
               </div>
             </div>
           </section>
@@ -144,9 +143,9 @@ export default function Home() {
           </div>
         </section>
       </PageLayout>
-      <section className="footer pt-56 pb-20 w-full text-center mt-[144px]">
-        <div className="relative w-fit mx-auto text-white px-1 lg:px-0">
-          <span className="text-xl font-medium text-end absolute right-0 -top-4">Begin with a single step towards kindness.</span>
+      <section className="footer pt-56 pb-20 px-1 w-full text-center mt-[144px]">
+        <div className="relative w-fit mx-auto text-white">
+          <span className="font-medium text-base md:text-xl text-end absolute right-0 -top-4">Begin with a single step towards kindness.</span>
           <h2 className="text-8xl md:text-9xl text-center">Become a part <br className="hideInSp" /> of the future</h2>
         </div>
         <Button buttonType="secondary" className="text-white w-fit mx-auto mt-[73px]">Join With Us</Button>

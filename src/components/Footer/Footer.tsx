@@ -7,7 +7,7 @@ const Footer = () => {
     return (
         <footer className="pt-[91px] pb-[31px] px-[20px] max-w-[1512px] mx-auto w-full">
             <div className="flex flex-wrap flex-col items-center text-center md:text-start md:items-start md:flex-row justify-center gap-10 md:gap-y-12 w-full mb-24">
-                <Image width={163} height={52} Img={Logo} className="w-[163px]" />
+                <Link to={"/"}><Image width={163} height={52} Img={Logo} isContain={true} className="w-[163px]" /></Link>
                 <div className="w-full lg:hidden"></div>
                 <div>
                     <h2 className="text-xl font-bold mb-[17.14px]">Learn More</h2>
