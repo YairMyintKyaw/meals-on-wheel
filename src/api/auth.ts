@@ -1,50 +1,40 @@
 import axios from "axios";
 
-export class Auth{
-    name:string;
-    email:string;
-    _token:string = "";
-    _apiUrl:string = "http://127.0.0.1:8000/api/";
-    constructor(name:string = "John", email:string = "john6@gmail.com"){
-        this.name= name;
-        this.email = email;
-    }
-    register(password:string){
-        axios.post(this._apiUrl+"register",
-            {
-                "name" : this.name,
-                "email" : this.email,
-                "password" : password
-            },
-            {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            .then(response=>{
-                console.log(response)
-                this._token = response.data.token
-            })
-            .catch(error=>console.log(error))
-    }
+const Auth = function () {
+  const _apiUrl: string = "http://127.0.0.1:8000/api/";
 
-    login(password:string){
-        axios.post(this._apiUrl+"login",
-            {
-                "email":this.email,
-                "password":password
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${this._token}`
-                }
-            }
-        )
-    }
+  function register(register_form: any) {
+    axios.post(_apiUrl + "register",
+      register_form
+      {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => console.log(error))
+  }
 
-    logout(){
-        axios.post(this._apiUrl+"logout");  
-    }
+  function login(email: string, password: string) {
+    axios.post(_apiUrl + "login",
+      {
+        "email": email,
+        "password": password
+      },
+      // {
+      //     headers: {
+      //         Authorization: `Bearer ${_token}`
+      //     }
+      // }
+    )
+  }
+  function logout() {
+    axios.post(_apiUrl + "logout");
+  }
 
+  return { register, login, logout }
+}();
 
-}
+export default Auth;
