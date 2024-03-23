@@ -4,6 +4,11 @@ import RegisterForm from "../../components/Form/Form";
 import AuthLayout from "../../components/Layout/AuthLayout";
 import { useEffect, useState } from "react";
 
+interface backendError{
+  email:string,
+  username:string
+}
+
 export const Register = () => {
   const { type } = useParams<{ type: string }>();
   const isUserInfoForm = useLocation().pathname.endsWith('/info');
@@ -11,11 +16,12 @@ export const Register = () => {
   const userDataform = setUpForm(type);
   const accRegisterForm = setUpForm("");
   const [userData, setUserData] = useState({ ...userDataform.initialValues, ...accRegisterForm.initialValues })
+  const [backendErrors, setBackendErrors] = useState<backendError>({email:"", username:""});
   const handleSubmit = (values: any) => {
     setUserData({ ...values, ...userData });
     console.log("Test");
-
     console.log({ ...values, ...userData });
+    if(0) nav("/register/member", { state: { data: 'your data here' } });
 
   }
   const handleNextStep = (values: any) => {

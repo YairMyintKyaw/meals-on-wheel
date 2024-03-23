@@ -38,12 +38,13 @@ const RegisterForm: React.FC<FormProps> = ({ initialValues, validationSchema, fi
                   id={field.name}
                   name={field.name}
                   accept={field.accept || ''}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    formikProps.setFieldValue(field.name, event.currentTarget.files![0]);
-                  }}
+                  // onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  //   formikProps.setFieldValue(field.name, event.currentTarget.files![0]);
+                  // }}
                 />
               ) : field.type === 'select' ? ( // Render select element for type 'select'
                 <Field as="select" id={field.name} name={field.name} className="border-[1px] border-gray-300 rounded-[6px] py-[12px] px-[16px]">
+                  <option value={""}>{field.label}</option>
                   {field.options && field.options.map(option => (
                     <option key={option} value={option}>{option}</option>
                   ))}

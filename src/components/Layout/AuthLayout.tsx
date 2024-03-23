@@ -5,12 +5,11 @@ import { useNavigate } from "react-router-dom";
 
 const AuthLayout = ({ title, children }: { title: string, children: React.ReactNode }) => {
     const nav = useNavigate()
-    const handleClick = () => {
-        nav(-1);
-    }
+    const handleClick = () => nav(-1);
+    
     return (
         <MainLayout>
-            <div className="flex py-[12px] h-full">
+            <div className="flex h-full">
                 <div className="flex-[6] h-full max-h-[calc(100vh-24px)] sticky top-[12px] overflow-hidden">
                     <figure className="rounded-[20px] overflow-hidden h-full overlay sticky top-0">
                         <img src={Img} alt="" className="h-full object-cover object-right" />
