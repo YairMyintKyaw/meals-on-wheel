@@ -10,7 +10,7 @@ const AuthLayout = ({ title, children }: { title: string, children: React.ReactN
     return (
         <MainLayout>
             <div className="flex h-full">
-                <div className="flex-[6] h-full max-h-[calc(100vh-24px)] sticky top-[12px] overflow-hidden">
+                <div className="flex-[6] hidden lg:block h-full max-h-[calc(100vh-24px)] sticky top-[12px] overflow-hidden">
                     <figure className="rounded-[20px] overflow-hidden h-full overlay sticky top-0">
                         <img src={Img} alt="" className="h-full object-cover object-right" />
                         <figcaption className="absolute bottom-[11%] left-[5%] z-10">

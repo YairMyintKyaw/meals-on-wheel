@@ -3,6 +3,7 @@ import { cn, setUpForm } from "../../utils/utils";
 import RegisterForm from "../../components/Form/Form";
 import AuthLayout from "../../components/Layout/AuthLayout";
 import { useEffect, useState } from "react";
+import Auth from "../../api/auth";
 
 interface backendError{
   email:string,
@@ -16,15 +17,30 @@ export const Register = () => {
   const userDataform = setUpForm(type);
   const accRegisterForm = setUpForm("");
   const [userData, setUserData] = useState({ ...userDataform.initialValues, ...accRegisterForm.initialValues })
-  const [backendErrors, setBackendErrors] = useState<backendError>({email:"", username:""});
-  const handleSubmit = (values: any) => {
+  const [backendErrors, setBackendErrors] = useState<any>({});
+  const handleSubmit = async(values: any) => {
+    Object.keys(values).forEach(function(key, index) {
+      values[key] = typeof values[key] === "number"? values[key].toString(): values[key];
+    });
     setUserData({ ...values, ...userData });
     console.log("Test");
     console.log({ ...values, ...userData });
-    if(0) nav("/register/member", { state: { data: 'your data here' } });
+    const response = await Auth.register({...values, ...userData, type:type});
+    console.log(response.data);
+    
+    if(response.data?.error) {
+      const error  = response.data.error;
+      console.log(error);
+      
+      setBackendErrors(error);
+      if(error["user_name"] || error["email"] || error["password"] || error["confirm_password"]) nav("/register/member", { state: { data: 'your data here' } });
+    };
+    
+    
 
   }
   const handleNextStep = (values: any) => {
+    //change the int to string 
     setUserData({ ...values })
     console.log(userData);
 
@@ -51,6 +67,7 @@ export const Register = () => {
         fields={accRegisterForm.fields}
         onSubmit={handleNextStep}
         submitButtonText="Next"
+        backendError={{backendErrors}}
         className={cn({ "hidden": isUserInfoForm })}
       />
 
@@ -60,6 +77,7 @@ export const Register = () => {
         fields={userDataform.fields}
         onSubmit={handleSubmit}
         submitButtonText="Submit"
+        backendError={{backendErrors}}
         className={cn({ "hidden": !isUserInfoForm })}
       />
       <p className="text-base text-neutral-800 font-medium text-center mt-[48px]">Have an account ? <Link to="/login">Sign In</Link> Here</p>

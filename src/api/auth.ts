@@ -1,20 +1,16 @@
 import axios from "axios";
 
-const Auth = function () {
+const Auth = (function () {
   const _apiUrl: string = "http://127.0.0.1:8000/api/";
 
-  function register(register_form: any) {
-    axios.post(_apiUrl + "register",
-      register_form
+  async function register (register_form: any) {
+    return await axios.post(_apiUrl + "register",
+      register_form,
       {
         headers: {
           'Content-Type': 'application/json'
         }
       })
-      .then(response => {
-        console.log(response)
-      })
-      .catch(error => console.log(error))
   }
 
   function login(email: string, password: string) {
@@ -35,6 +31,6 @@ const Auth = function () {
   }
 
   return { register, login, logout }
-}();
+})();
 
 export default Auth;

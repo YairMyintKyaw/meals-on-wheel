@@ -16,11 +16,12 @@ interface FormProps {
   fields: FieldConfig[];
   onSubmit: (values: any, formikHelpers: any) => void;
   submitButtonText: string;
+  backendError: any;
   className?: string;
   children?: React.ReactNode
 }
 
-const RegisterForm: React.FC<FormProps> = ({ initialValues, validationSchema, fields, onSubmit, submitButtonText, className, children }) => {
+const RegisterForm: React.FC<FormProps> = ({ initialValues, validationSchema, fields, onSubmit, submitButtonText, backendError, className, children }) => {
   return (
     <Formik
       initialValues={initialValues}
@@ -52,7 +53,11 @@ const RegisterForm: React.FC<FormProps> = ({ initialValues, validationSchema, fi
               ) : (
                 <Field type={field.type} id={field.name} placeholder={field.label} name={field.name} className="border-[1px] border-gray-300 rounded-[6px] py-[12px] px-[16px]" />
               )}
+              {console.log(backendError.backendError)}
+              {console.log(field.name)}
+              {backendError[field.name] && <p className='text-red-800 text-sm font-medium'>backendError[field.name][0]</p>}
               <ErrorMessage name={field.name} component="div" className='text-red-800 text-sm font-medium' />
+
             </div>
           ))}
           {children}

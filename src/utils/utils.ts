@@ -17,11 +17,10 @@ export const setUpForm = (formType: string | undefined): any => {
         age: string | number;
         phone_number: string | number;
         emergency_contact_number: string | number;
-        contact: string;
         date_of_birth: string;
         address: string;
         dietary_restriction: string;
-        image: string
+        image: string 
       }
       const validationSchema: ObjectSchema<FormValues> = object({
         first_name: string().required("First Name is required"),
@@ -30,11 +29,9 @@ export const setUpForm = (formType: string | undefined): any => {
         age: string().required("Age is required"),
         phone_number: string().required("Phone Number is required"),
         emergency_contact_number: string().required("Phone Number is required"),
-        contact: string().required("Contact is required"),
         date_of_birth: string().required("Date of Birth is required"),
         address: string().required("Address is required"),
         dietary_restriction: string().required("Dietary Restrictions is required"),
-        image: string().required("Profile picture is required"),
       });
       const fields: FieldConfig[] = [
         { name: "first_name", label: "First Name", type: "text" },
@@ -43,12 +40,11 @@ export const setUpForm = (formType: string | undefined): any => {
           name: "gender",
           label: "Gender",
           type: "select",
-          options: ["Male", "Female"],
+          options: ["male", "female"],
         },
         { name: "age", label: "Age", type: "number" },
         { name: "phone_number", label: "Phone Number", type: "number" },
-        { name: "emergency_contact_number", label: "Phone Number", type: "number" },
-        { name: "contact", label: "Emergency Contact Number", type: "number" },
+        { name: "emergency_contact_number", label: "Emergency Contact Number", type: "number" },
         { name: "date_of_birth", label: "Date of Birth", type: "date" },
         { name: "address", label: "Delivery Address", type: "text" },
         { name: "dietary_restriction", label: "Dietary Restrictions", type: "text" },
@@ -61,7 +57,6 @@ export const setUpForm = (formType: string | undefined): any => {
         age: "",
         phone_number: "",
         emergency_contact_number: "",
-        contact: "",
         date_of_birth: "",
         address: "",
         dietary_restriction: "",
@@ -88,7 +83,7 @@ export const setUpForm = (formType: string | undefined): any => {
         date_of_birth: string().required("Date of Birth is required"),
         relationship_with_member: string().required("Date of Birth is required"),
         address: string().required("Address is required"),
-        image: string().required("Profile picture is required"),
+        
       });
       const fields: FieldConfig[] = [
         { name: "first_name", label: "First Name", type: "text" },
@@ -97,7 +92,7 @@ export const setUpForm = (formType: string | undefined): any => {
           name: "gender",
           label: "Gender",
           type: "select",
-          options: ["Male", "Female"],
+          options: ["male", "female"],
         },
         { name: "phone_number", label: "Phone Number", type: "number" },
         { name: "date_of_birth", label: "Date of Birth", type: "date" },
@@ -134,7 +129,7 @@ export const setUpForm = (formType: string | undefined): any => {
         phone_number: string().required("Phone Number is required"),
         shop_name: string().required("Shop name is required"),
         shop_address: string().required("Shop address is required"),
-        image: string().required("Profile picture is required"),
+        
       });
       const fields: FieldConfig[] = [
         { name: "first_name", label: "First Name", type: "text" },
@@ -173,7 +168,7 @@ export const setUpForm = (formType: string | undefined): any => {
         phone_number: string().required("Phone Number is required"),
         date_of_birth: string().required("Date of birth is required"),
         address: string().required("Address is required"),
-        image: string().required("Profile picture is required"),
+        
       });
       const fields: FieldConfig[] = [
         { name: "first_name", label: "First Name", type: "text" },
@@ -182,7 +177,7 @@ export const setUpForm = (formType: string | undefined): any => {
           name: "gender",
           label: "Gender",
           type: "select",
-          options: ["Male", "Female"],
+          options: ["male", "female"],
         },
         { name: "phone_number", label: "Phone Number", type: "number" },
         { name: "date_of_birth", label: "Date Of Birth", type: "date" },
@@ -217,7 +212,7 @@ export const setUpForm = (formType: string | undefined): any => {
         phone_number: string().required("Phone Number is required"),
         date_of_birth: string().required("Date of birth is required"),
         address: string().required("Address is required"),
-        image: string().required("Profile picture is required"),
+        
       });
       const fields: FieldConfig[] = [
         { name: "first_name", label: "First Name", type: "text" },
@@ -226,7 +221,7 @@ export const setUpForm = (formType: string | undefined): any => {
           name: "gender",
           label: "Gender",
           type: "select",
-          options: ["Male", "Female"],
+          options: ["male", "female"],
         },
         { name: "phone_number", label: "Phone Number", type: "number" },
         { name: "date_of_birth", label: "Date Of Birth", type: "date" },
@@ -247,13 +242,13 @@ export const setUpForm = (formType: string | undefined): any => {
     default: {
       interface FormValues {
         email: string;
-        name: string;
+        user_name: string;
         password: string;
         confirm_password: string;
       }
       const validationSchema = object({
         email: string().required("Email is required"),
-        name: string().required("Name is required"),
+        user_name: string().required("Name is required"),
         password: string().required("Password is required"),
         confirm_password: string()
           .oneOf([ref('password')], 'Passwords must match')
@@ -261,13 +256,13 @@ export const setUpForm = (formType: string | undefined): any => {
       });
       const fields: FieldConfig[] = [
         { name: "email", label: "Email", type: "text" },
-        { name: "name", label: "User Name", type: "text" },
+        { name: "user_name", label: "User Name", type: "text" },
         { name: "password", label: "Password", type: "text" },
         { name: "confirm_password", label: "Confirm Password", type: "text" },
       ];
       const initialValues: FormValues = {
         email: "",
-        name: "",
+        user_name: "",
         password: "",
         confirm_password: "",
       };

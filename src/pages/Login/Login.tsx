@@ -3,31 +3,36 @@ import AuthLayout from "../../components/Layout/AuthLayout"
 import RegisterForm, { FieldConfig } from "../../components/Form/Form";
 import { Field } from "formik";
 import { Link } from "react-router-dom";
+import Auth from "../../api/auth";
+import { useState } from "react";
+
+interface FormValues {
+  email: string,
+  password: string
+}
 
 const Login = () => {
-  interface FormValues {
-    username: string,
-    password: string
-  }
-
+  const [backendError, setBackendError] = useState({});
   const initialValues: FormValues = {
-    username: "",
+    email: "",
     password: ""
   };
 
   const validationSchema: ObjectSchema<FormValues> = object({
-    username: string().required('User Name or Email is require'),
+    email: string().required('Email is required'),
     password: string().required('Password is required')
   });
 
   const fields: FieldConfig[] = [
-    { name: 'username', label: 'User Name (or) Email Address', type: 'text' },
+    { name: 'email', label: 'Email Address', type: 'text' },
     { name: 'password', label: 'Password', type: 'text' },
   ];
 
   const handleSubmit = (values: FormValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
     // Handle form submission logic here
     setSubmitting(false);
+    const { email, password } = values;
+    Auth.login(email, password)
   };
   return (
     <AuthLayout title="Welcome Back">
@@ -37,6 +42,7 @@ const Login = () => {
         validationSchema={validationSchema}
         fields={fields}
         onSubmit={handleSubmit}
+        backendError={backendError}
         submitButtonText="Submit"
       >
         <div className="flex justify-between mb-[48px]">
@@ -49,4 +55,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Login  
