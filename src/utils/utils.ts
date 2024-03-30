@@ -64,7 +64,7 @@ export const setUpForm = (formType: string | undefined): any => {
       };
       return { initialValues, validationSchema, fields };
     }
-    case "careGiver": {
+    case "caregiver": {
       interface FormValues {
         first_name: string;
         last_name: string;
@@ -129,14 +129,13 @@ export const setUpForm = (formType: string | undefined): any => {
         phone_number: string().required("Phone Number is required"),
         shop_name: string().required("Shop name is required"),
         shop_address: string().required("Shop address is required"),
-        
       });
       const fields: FieldConfig[] = [
         { name: "first_name", label: "First Name", type: "text" },
         { name: "last_name", label: "Last Name", type: "text" },
         { name: "address", label: "Delivery Address", type: "text" },
         { name: "phone_number", label: "Phone Number", type: "number" },
-        { name: "shop_name", label: "Shop Name", type: "date" },
+        { name: "shop_name", label: "Shop Name", type: "text" },
         { name: "shop_address", label: "Shop address with member", type: "text" },
         { name: "image", label: "Profile Picture", type: "file", accept: "image/png, image/jpeg" }
       ];
@@ -151,7 +150,7 @@ export const setUpForm = (formType: string | undefined): any => {
       };
       return { initialValues, validationSchema, fields };
     }
-    case "donator":{
+    case "donor":{
       interface FormValues {
         first_name: string;
         last_name: string;
@@ -236,6 +235,53 @@ export const setUpForm = (formType: string | undefined): any => {
         date_of_birth: "",
         address: "",
         image: ""
+      };
+      return { initialValues, validationSchema, fields };
+    }
+    case "meal":{
+      interface FormValues {
+        "name" : string,
+        "ingredients" : string,
+        "allergy_information" : string,
+        "nutritional_information" : string,
+        "dietary_restrictions" : string,
+        "price" : number,
+        "is_frozen" : boolean,
+        "delivery_status" : boolean,
+        "image" : string,
+        "temperature" : string
+      }        
+      const validationSchema: ObjectSchema<FormValues> = object({
+        name: string().required("First Name is required"),
+        ingredients: string().required("Last Name is required"),
+        allergy_information: string().required("Gender is required"),
+        nutritional_information: string().required("Phone Number is required"),
+        dietary_restrictions: string().required("Delivery Status is required"),
+        image: string().required("Date of birth is required"),
+      });
+      const fields: FieldConfig[] = [
+        { name: "name", label: "Name", type: "text" },
+        { name: "ingredients", label: "Ingredients", type: "text" },
+        { name: "allergy_information", label: "Allergy information", type: "text" },
+        { name: "nutritional_information", label: "Nutritional Information", type: "date" },
+        { name: "dietary_restrictions", label: "Dietary restrictions", type: "text" },
+        { name: "price", label: "Price", type: "number" },
+        { name: "is_frozen", label: "Is the food frozen?", type: "checkbox" },
+        { name: "delivery_status", label: "Delivery Status", type: "checkbox" },
+        { name: "temperature", label: "Temperature", type: "checkbox" },
+        { name: "image", label: "Picture", type: "file", accept: "image/png, image/jpeg" }
+      ];
+      const initialValues: FormValues = {
+        "name" : "",
+        "ingredients" : "",
+        "allergy_information" : "",
+        "nutritional_information" : "",
+        "dietary_restrictions" : "",
+        "price" : 0,
+        "is_frozen" : false,
+        "delivery_status" : false,
+        "image" : "",
+        "temperature" : ""
       };
       return { initialValues, validationSchema, fields };
     }

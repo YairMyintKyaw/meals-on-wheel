@@ -2,9 +2,12 @@ import { ObjectSchema, object, string } from "yup";
 import AuthLayout from "../../components/Layout/AuthLayout"
 import RegisterForm, { FieldConfig } from "../../components/Form/Form";
 import { Field } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Auth from "../../api/auth";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../store/userSlice";
+import { RootState } from "../../store/store";
 
 interface FormValues {
   email: string,
@@ -12,7 +15,12 @@ interface FormValues {
 }
 
 const Login = () => {
-  const [backendError, setBackendError] = useState({});
+  const [isbackendError, setIsBackendError] = useState(false);
+  const diapatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user);
+  const nav = useNavigate();
+  console.log(user);
+  
   const initialValues: FormValues = {
     email: "",
     password: ""
@@ -28,21 +36,30 @@ const Login = () => {
     { name: 'password', label: 'Password', type: 'text' },
   ];
 
-  const handleSubmit = (values: FormValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
+  const handleSubmit = async(values: FormValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
     // Handle form submission logic here
-    setSubmitting(false);
     const { email, password } = values;
-    Auth.login(email, password)
+    const response = await Auth.login(email, password);
+    console.log(response);
+    if(response.status === 200 && !response.data.error){
+      // save user data
+      const userData = response.data.user;
+      diapatch(setUser({...userData, token:response?.data?.token}));
+      nav("/")
+    }
+    else{
+      setIsBackendError(true);
+    }
   };
   return (
     <AuthLayout title="Welcome Back">
       <p className="text-lg font-medium mb-[24px] text-neutral-500">Let's catch you up on what's happening at MerryMeal.</p>
+      {isbackendError && <p className="text-lg font-medium mb-[24px] text-red-800">Email or passowrd is wrong.</p>}
       <RegisterForm
         initialValues={initialValues}
         validationSchema={validationSchema}
         fields={fields}
         onSubmit={handleSubmit}
-        backendError={backendError}
         submitButtonText="Submit"
       >
         <div className="flex justify-between mb-[48px]">

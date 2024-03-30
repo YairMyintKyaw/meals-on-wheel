@@ -84,7 +84,6 @@ export default function Home() {
             {features.map((feature, index) => <Card key={index} title={feature.title} description={feature.description} img={feature.img} type="link" />)}
           </div>
         </div>
-        {/*  */}
         <section className="mt-[80px]">
           <h2 className="text-3xl font-bold text-green-800 text-center"> Let's create a brighter tomorrow</h2>
           <Text className="mt-[40px] mb-[80px] text-center">Join us in supporting MerryMeal, where every contribution brings warmth and nourishment to those in need.</Text>

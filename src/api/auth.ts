@@ -1,33 +1,30 @@
 import axios from "axios";
+import { BASE_URL } from "./constant";
 
 const Auth = (function () {
-  const _apiUrl: string = "http://127.0.0.1:8000/api/";
 
   async function register (register_form: any) {
-    return await axios.post(_apiUrl + "register",
+    return await axios.post(BASE_URL + "register",
       register_form,
       {
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'multipart/form-data'
         }
       })
   }
 
-  function login(email: string, password: string) {
-    axios.post(_apiUrl + "login",
+  async function login(email: string, password: string) {
+    return await axios.post(BASE_URL + "login",
       {
         "email": email,
         "password": password
-      },
-      // {
-      //     headers: {
-      //         Authorization: `Bearer ${_token}`
-      //     }
-      // }
-    )
+      }
+    ).catch((error)=>{
+      return error
+    })
   }
   function logout() {
-    axios.post(_apiUrl + "logout");
+    axios.post(BASE_URL + "logout");
   }
 
   return { register, login, logout }

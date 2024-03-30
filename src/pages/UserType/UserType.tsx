@@ -18,8 +18,8 @@ const UserType = () => {
                 <h1 className="text-center text-green-800 text-4xl font-semibold mb-[36px]">Join With Us</h1>
                 <ul className="w-[380px] flex flex-col gap-[24px] mx-auto">
                     <li><Link to={"/register/member"}><Button handleClick={handleClick}>Member</Button></Link></li>
-                    <li><Link to={"/register/care-giver"}><Button handleClick={handleClick}>Care Giver</Button></Link></li>
-                    <li><Link to={"/register/donator"}><Button handleClick={handleClick}>Donator/Supporter</Button></Link></li>
+                    <li><Link to={"/register/caregiver"}><Button handleClick={handleClick}>Care Giver</Button></Link></li>
+                    <li><Link to={"/register/donor"}><Button handleClick={handleClick}>Donator/Supporter</Button></Link></li>
                     <li><Link to={"/register/volunteer"}><Button handleClick={handleClick}>Volunteer</Button></Link></li>
                     <li><Link to={"/register/partner"}><Button handleClick={handleClick}>Partner</Button></Link></li>
                 </ul>

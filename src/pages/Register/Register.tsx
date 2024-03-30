@@ -23,17 +23,18 @@ export const Register = () => {
       values[key] = typeof values[key] === "number"? values[key].toString(): values[key];
     });
     setUserData({ ...values, ...userData });
-    console.log("Test");
-    console.log({ ...values, ...userData });
-    const response = await Auth.register({...values, ...userData, type:type});
-    console.log(response.data);
+    console.log({ ...values, ...userData,type:type });
+    const response = await Auth.register({...values, ...userData, type:type}).catch(e=>console.log(e));
     
-    if(response.data?.error) {
+    if(response?.data?.error) {
       const error  = response.data.error;
       console.log(error);
-      
       setBackendErrors(error);
-      if(error["user_name"] || error["email"] || error["password"] || error["confirm_password"]) nav("/register/member", { state: { data: 'your data here' } });
+      if(error["user_name"] || error["email"] || error["password"] || error["confirm_password"]) nav(`/register/${type}`);
+    }else{
+      // dispatch()
+      console.log(response);
+      nav("/login");
     };
     
     
@@ -67,7 +68,7 @@ export const Register = () => {
         fields={accRegisterForm.fields}
         onSubmit={handleNextStep}
         submitButtonText="Next"
-        backendError={{backendErrors}}
+        backendError={backendErrors}
         className={cn({ "hidden": isUserInfoForm })}
       />
 
@@ -77,7 +78,7 @@ export const Register = () => {
         fields={userDataform.fields}
         onSubmit={handleSubmit}
         submitButtonText="Submit"
-        backendError={{backendErrors}}
+        backendError={backendErrors}
         className={cn({ "hidden": !isUserInfoForm })}
       />
       <p className="text-base text-neutral-800 font-medium text-center mt-[48px]">Have an account ? <Link to="/login">Sign In</Link> Here</p>
