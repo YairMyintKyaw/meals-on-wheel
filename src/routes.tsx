@@ -13,8 +13,9 @@ const routes = () => {
         <Suspense fallback="Loading...">
             <Routes>
                 <Route path="/" element={<HomeMedium />} />
-                <Route path="/user-type" element={<UserType />} />
-                <Route path="/register/:type/info?" element={<Register />} />
+                <Route path="/user" element={<UserType />} />
+                <Route path="user/register/:type/info?" element={<Register />} />
+                {/* <Route path="user/update/:type" element={<AccUpdate />} /> */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/meals" element={<Meals />} />
                 <Route path="/meals/:id" element={<MealDetail />} />

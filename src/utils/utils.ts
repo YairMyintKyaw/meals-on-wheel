@@ -248,7 +248,7 @@ export const setUpForm = (formType: string | undefined): any => {
         "price" : number,
         "is_frozen" : boolean,
         "delivery_status" : boolean,
-        "image" : string,
+        "image" : File,
         "temperature" : string
       }        
       const validationSchema: ObjectSchema<FormValues> = object({
@@ -257,18 +257,17 @@ export const setUpForm = (formType: string | undefined): any => {
         allergy_information: string().required("Gender is required"),
         nutritional_information: string().required("Phone Number is required"),
         dietary_restrictions: string().required("Delivery Status is required"),
-        image: string().required("Date of birth is required"),
       });
       const fields: FieldConfig[] = [
         { name: "name", label: "Name", type: "text" },
         { name: "ingredients", label: "Ingredients", type: "text" },
         { name: "allergy_information", label: "Allergy information", type: "text" },
-        { name: "nutritional_information", label: "Nutritional Information", type: "date" },
+        { name: "nutritional_information", label: "Nutritional Information", type: "text" },
         { name: "dietary_restrictions", label: "Dietary restrictions", type: "text" },
         { name: "price", label: "Price", type: "number" },
+        { name: "temperature", label: "Temperature", type: "text" },
         { name: "is_frozen", label: "Is the food frozen?", type: "checkbox" },
         { name: "delivery_status", label: "Delivery Status", type: "checkbox" },
-        { name: "temperature", label: "Temperature", type: "checkbox" },
         { name: "image", label: "Picture", type: "file", accept: "image/png, image/jpeg" }
       ];
       const initialValues: FormValues = {
@@ -280,7 +279,6 @@ export const setUpForm = (formType: string | undefined): any => {
         "price" : 0,
         "is_frozen" : false,
         "delivery_status" : false,
-        "image" : "",
         "temperature" : ""
       };
       return { initialValues, validationSchema, fields };

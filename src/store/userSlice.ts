@@ -5,12 +5,14 @@ export type userType =  "member" | "partner" | "donor" | "caregiver" | "voluntee
 interface UserData {
   type: userType;
   user: any;
-  token: string | null
+  token: string | null;
+  csrfToken?:string
 }
 const initialState:UserData = {
-  type: "partner",
+  type: "admin",
   token:"", 
-  user:{}
+  user:{},
+  csrfToken:""
 };
 
 export const userSlice = createSlice({
@@ -26,9 +28,12 @@ export const userSlice = createSlice({
       state.user = payload;
       state.type = payload.type;
       state.token = payload.token;
+    },
+    updateUser:(state, {payload})=>{
+      state.csrfToken=payload
     }
   },
 });
 
-export const { clearUser, setUser } = userSlice.actions;
+export const { clearUser, setUser, updateUser} = userSlice.actions;
 export default userSlice.reducer;

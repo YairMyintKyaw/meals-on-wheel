@@ -7,8 +7,8 @@ import { cn } from "../../utils/utils";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { RxCross1 } from "react-icons/rx";
 import { RootState } from "../../store/store";
-import { useSelector } from "react-redux";
-import { userType } from "../../store/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { clearUser, userType } from "../../store/userSlice";
 import Auth from "../../api/auth";
 
 const userNav = {
@@ -58,7 +58,8 @@ const userNav = {
 const Navigation = () => {
   const [isDropdownActive, setIsDropdownActive] = useState(false)
   const [isSlidebarActive, setIsSlidebarActive] = useState(false)
-  const type:userType = useSelector((state: RootState) => state.user.type);
+  const dispatch = useDispatch();
+  const {type, token}:{type:userType, token:string|null} = useSelector((state: RootState) => state.user);
   console.log(type);
   
   const nav = useNavigate();
@@ -69,10 +70,16 @@ const Navigation = () => {
     nav("/login")
   }
   const navigateToSignUp = () => {
-    nav("/user-type")
+    nav("/user")
   }
-  const handleLogout = ()=>{
-    Auth.logout();
+  const handleLogout = async()=>{
+    if(token){
+      console.log(token);
+      const response = await Auth.logout(token);
+      console.log(response);
+      dispatch(clearUser());
+      nav("/");
+    }
   }
   const handleToggleSlidebar = ()=>{
     setIsSlidebarActive(!isSlidebarActive)
@@ -186,10 +193,17 @@ const Navigation = () => {
         }
         
       </nav>
-      <div className="gap-2 items-center mt-10">
-        <Button handleClick={navigateToSignIn} className="hover:scale-100 hover:shadow-lg rounded-none mb-5" buttonType="secondary">Sign in</Button>
-        <Button handleClick={navigateToSignUp} className="hover:scale-100 hover:shadow-lg rounded-none" buttonType="secondary--green">Sign up</Button>
-      </div>
+
+      {
+        !type?
+        <div className="gap-2 items-center mt-10">
+          <Button handleClick={navigateToSignIn} className="hover:scale-100 hover:shadow-lg rounded-none mb-5" buttonType="secondary">Sign in</Button>
+          <Button handleClick={navigateToSignUp} className="hover:scale-100 hover:shadow-lg rounded-none" buttonType="secondary--green">Sign up</Button>
+        </div>:
+        <div className="items-center mt-10">
+          <Button handleClick={handleLogout} className="hover:scale-100 hover:shadow-lg rounded-none mb-5" buttonType="secondary--green">Sign out</Button>
+        </div>
+      }
     </div>
   </header>;
 };

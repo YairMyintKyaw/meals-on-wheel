@@ -67,7 +67,7 @@ const Login = () => {
           <Link to={"/"}>Forgot password?</Link>
         </div>
       </RegisterForm>
-      <p className="text-base text-neutral-800 font-medium text-center mt-[48px]">Don’t have an account ? <Link to={"/user-type"}>Sign Up</Link> here </p>
+      <p className="text-base text-neutral-800 font-medium text-center mt-[48px]">Don’t have an account ? <Link to={"/user"}>Sign Up</Link> here </p>
     </AuthLayout>
   )
 }

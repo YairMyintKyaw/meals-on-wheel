@@ -23,8 +23,16 @@ const Auth = (function () {
       return error
     })
   }
-  function logout() {
-    axios.post(BASE_URL + "logout");
+  function logout(token:string) {
+    console.log(token);
+    
+    return axios.post(BASE_URL + "logout",{},
+      {
+        headers: {
+          'Authorization':`Bearer ${token}`
+        }
+      }
+    );
   }
 
   return { register, login, logout }

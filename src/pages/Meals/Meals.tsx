@@ -1,6 +1,5 @@
 import MealCard from "../../components/Card/MealCard"
 import PageLayout from "../../components/Layout/PageLayout"
-import Img from "../../assets/images/dummy_meal.jpg"
 import { BiPlus } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -20,8 +19,9 @@ const Meals = () => {
     if (type !== "partner") nav("/");
     (async ()=>{
       if(token) {
-        const resposne = await MealsModule.getPartnerMeals(token).catch(e=>console.log(e) )
-        setMeals(resposne?.data);
+        const response = await MealsModule.getPartnerMeals(token).catch(e=>console.log(e) )
+        setMeals(response?.data?.data);
+        console.log("meals", meals);
       }
     })()
   }, [])
@@ -33,16 +33,7 @@ const Meals = () => {
           <button onClick={handleClick} className="bg-green-800 rounded-full text-white text-2xl p-1"><BiPlus /></button>
         </div>
         <div className="mt-5 flex gap-3 flex-wrap">
-          <MealCard name={"Lorem lorem lorem"} img={Img} id={1} />
-          <MealCard name={"Lorem lorem lorem"} img={Img} id={1} />
-          <MealCard name={"Lorem lorem lorem"} img={Img} id={1} />
-          <MealCard name={"Lorem lorem lorem"} img={Img} id={1} />
-          <MealCard name={"Lorem lorem lorem"} img={Img} id={1} />
-          <MealCard name={"Lorem lorem lorem"} img={Img} id={1} />
-          <MealCard name={"Lorem lorem lorem"} img={Img} id={1} />
-          <MealCard name={"Lorem lorem lorem"} img={Img} id={1} />
-          <MealCard name={"Lorem lorem lorem"} img={Img} id={1} />
-          {meals?meals.map(meal=><MealCard key={meal.id} id={meal.id} name={meal.name} img={meal.name}/>):"You do not have any meal yet. Do you want to create one?"}
+          {meals?meals.map(meal=><MealCard key={meal.id} id={meal.id} name={meal.name} img={meal.image}/>):"You do not have any meal yet. Do you want to create one?"}
         </div>
       </section>
     </PageLayout>

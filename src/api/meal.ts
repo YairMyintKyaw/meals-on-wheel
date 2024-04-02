@@ -2,17 +2,21 @@ import axios from "axios";
 import { BASE_URL } from "./constant";
 
 export interface MealsInterface {
-  "id" : number,
+  "id": number,
   "name" : string,
   "ingredients" : string,
   "allergy_information" : string,
   "nutritional_information" : string,
   "dietary_restrictions" : string,
   "price" : number,
-  "is_frozen" : boolean,
-  "delivery_status" : boolean,
+  "is_frozen" : string,
+  "delivery_status" : string,
   "image" : string,
-  "temperature" : string
+  "temperature" : string,
+  "is_preparing" : string,
+  "is_finished" : string,
+  "is_pickup" : string,
+  "is_delivered" : string,
 }
   
 
@@ -38,18 +42,18 @@ const Meals = (function () {
     )
   }
   const createMeal = async (mealData:MealsInterface, token:string) => {
-    return await axios.post(BASE_URL + "meals",
+    return await axios.post(BASE_URL + "meal",
       mealData,
       {
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data',
           'Authorization':`Bearer ${token}`
         }
       }
     )
   }
   const getMealDetail = async (id: number, token:string) => {
-    return await axios.get(BASE_URL+"meals/"+id,{
+    return await axios.get(BASE_URL+"meal/"+id,{
       headers: {
         'Content-Type': 'application/json',
         'Authorization':`Bearer ${token}`
@@ -57,7 +61,9 @@ const Meals = (function () {
     });
   }
   const updateMeal = async (id: number, updateData:any, token:string) => {
-    return await axios.put(BASE_URL+"meals/"+id,
+    console.log(updateData);
+    
+    return await axios.put(BASE_URL+"meal/"+id,
       updateData,
       {
         headers: {
@@ -68,7 +74,7 @@ const Meals = (function () {
     )
   }
   const deleteMeal = async (id: number, token:string) => {
-    return await axios.delete(BASE_URL+"meals/"+id,
+    return await axios.delete(BASE_URL+"meal/"+id,
       {
         headers: {
           'Content-Type': 'application/json',

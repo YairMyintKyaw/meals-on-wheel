@@ -11,10 +11,8 @@ import PageLayout from "../../components/Layout/PageLayout"
 
 const HomeMedium = () => {
   const {type} = useSelector((state: RootState) => state.user);
-  console.log(type);
-  
-  let componentToRender;  
 
+  let componentToRender;  
   switch (type) {
     case "member":
       componentToRender = <HomeMember/>;
@@ -37,12 +35,15 @@ const HomeMedium = () => {
     default:
       componentToRender = <Home />;
       break;
-  }
+  }  
+
   return (
     <>
-    <PageLayout>
-      {componentToRender}
-    </PageLayout>
+    {!type?<Home/>:
+      <PageLayout>
+        {componentToRender}
+      </PageLayout>
+    }
     </>
   )
 }

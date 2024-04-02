@@ -5,11 +5,6 @@ import AuthLayout from "../../components/Layout/AuthLayout";
 import { useEffect, useState } from "react";
 import Auth from "../../api/auth";
 
-interface backendError{
-  email:string,
-  username:string
-}
-
 export const Register = () => {
   const { type } = useParams<{ type: string }>();
   const isUserInfoForm = useLocation().pathname.endsWith('/info');
@@ -30,7 +25,7 @@ export const Register = () => {
       const error  = response.data.error;
       console.log(error);
       setBackendErrors(error);
-      if(error["user_name"] || error["email"] || error["password"] || error["confirm_password"]) nav(`/register/${type}`);
+      if(error["user_name"] || error["email"] || error["password"] || error["confirm_password"]) nav(`/user/register/${type}`);
     }else{
       // dispatch()
       console.log(response);
@@ -55,7 +50,7 @@ export const Register = () => {
         return isFilled;
       }, 0)
       if (isRegisterFilled === 0) {
-        nav(`/register/${type}`)
+        nav(`/user/register/${type}`)
       }
     }
   }, [userData])

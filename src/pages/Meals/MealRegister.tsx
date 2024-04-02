@@ -12,9 +12,22 @@ const MealRegister = () => {
   const [backendErrors, setBackendErrors] = useState();
   const {token, type} = useSelector((state: RootState) => state.user);
   const nav = useNavigate();
+  console.log(token);
+  
   const handleSubmit = async(values:any) => {
-    const response = token && await Meals.createMeal(values,token).catch(error=>setBackendErrors(error));
-    console.log(response);
+    if(token){
+      const data = {
+        ...values, 
+        "is_preparing" : false,
+        "is_finished" : false,
+        "is_pickup" : false,
+        "is_delivered" : false,
+      }
+      console.log(data);
+      // console.log(token);
+      const response = await Meals.createMeal(data,token).catch(error=>setBackendErrors(error));
+      console.log("response:", response);
+    }
   }
   useEffect(()=>{
     if(type !== "admin" && type !== "partner" ) nav("/")
