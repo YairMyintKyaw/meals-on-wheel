@@ -1,37 +1,60 @@
 import { ObjectSchema, object, string } from "yup";
 import AuthLayout from "../../components/Layout/AuthLayout"
-import RegisterForm, { FieldConfig } from "../../components/Form/Form";
+import RegisterForm, { FieldConfig } from "../../components/form/Form";
 import { Field } from "formik";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Auth from "../../api/auth";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../store/userSlice";
+import { RootState } from "../../store/store";
+
+interface FormValues {
+  email: string,
+  password: string
+}
 
 const Login = () => {
-  interface FormValues {
-    username: string,
-    password: string
-  }
-
+  const [isbackendError, setIsBackendError] = useState(false);
+  const diapatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user);
+  const nav = useNavigate();
+  console.log(user);
+  
   const initialValues: FormValues = {
-    username: "",
+    email: "",
     password: ""
   };
 
   const validationSchema: ObjectSchema<FormValues> = object({
-    username: string().required('User Name or Email is require'),
+    email: string().required('Email is required'),
     password: string().required('Password is required')
   });
 
   const fields: FieldConfig[] = [
-    { name: 'username', label: 'User Name (or) Email Address', type: 'text' },
+    { name: 'email', label: 'Email Address', type: 'text' },
     { name: 'password', label: 'Password', type: 'text' },
   ];
 
-  const handleSubmit = (values: FormValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
+  const handleSubmit = async(values: FormValues, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
     // Handle form submission logic here
-    setSubmitting(false);
+    const { email, password } = values;
+    const response = await Auth.login(email, password);
+    console.log(response);
+    if(response.status === 200 && !response.data.error){
+      // save user data
+      const userData = response.data.user;
+      diapatch(setUser({...userData, token:response?.data?.token}));
+      nav("/")
+    }
+    else{
+      setIsBackendError(true);
+    }
   };
   return (
     <AuthLayout title="Welcome Back">
       <p className="text-lg font-medium mb-[24px] text-neutral-500">Let's catch you up on what's happening at MerryMeal.</p>
+      {isbackendError && <p className="text-lg font-medium mb-[24px] text-red-800">Email or passowrd is wrong.</p>}
       <RegisterForm
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -44,9 +67,9 @@ const Login = () => {
           <Link to={"/"}>Forgot password?</Link>
         </div>
       </RegisterForm>
-      <p className="text-base text-neutral-800 font-medium text-center mt-[48px]">Don’t have an account ? <Link to={"/user-type"}>Sign Up</Link> here </p>
+      <p className="text-base text-neutral-800 font-medium text-center mt-[48px]">Don’t have an account ? <Link to={"/user"}>Sign Up</Link> here </p>
     </AuthLayout>
   )
 }
 
-export default Login
+export default Login  

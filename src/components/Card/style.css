@@ -1,0 +1,17 @@
+.mealCard::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    background-color: #2e2e2e;
+    opacity: 0;
+    z-index: 10;
+    transition: all .8s ease-in-out;
+}
+
+.mealCard:hover::before{
+    opacity: .6;
+}

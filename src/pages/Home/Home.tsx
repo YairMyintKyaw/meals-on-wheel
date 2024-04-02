@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux"
 import { RootState } from "../../store/store";
-import MainLayout from "../../components/Layout/MainLayout";
 import "./style.css";
 import NumberList, { NumberData } from "../../components/Number/Number";
 import Text from "../../components/Text/Text";
@@ -17,7 +16,9 @@ import Hand from "../../assets/images/Top/img_hand.png"
 import Smile from "../../assets/images/Top/img_smiley.png"
 import Users from "../../assets/images/Top/img_users.png"
 import Accordion, { FAQ_type } from "../../components/Accordion/Accordion";
-import Button from "../../components/Button/Button";
+import Button from "../../components/button/Button";
+import PageLayout from "../../components/Layout/PageLayout";
+import Footer from "../../components/Footer/Footer";
 
 const numbers: NumberData[] = [
   {
@@ -64,9 +65,8 @@ export default function Home() {
   const user = useSelector((state: RootState) => state.user);
 
   return (
-
     <>
-      <MainLayout>
+      <PageLayout isFooter={false}>
         <div className="kv mt-[56px]">
           <Image Img={KV} width={1360} height={473} object="center" />
         </div>
@@ -84,7 +84,6 @@ export default function Home() {
             {features.map((feature, index) => <Card key={index} title={feature.title} description={feature.description} img={feature.img} type="link" />)}
           </div>
         </div>
-        {/*  */}
         <section className="mt-[80px]">
           <h2 className="text-3xl font-bold text-green-800 text-center"> Let's create a brighter tomorrow</h2>
           <Text className="mt-[40px] mb-[80px] text-center">Join us in supporting MerryMeal, where every contribution brings warmth and nourishment to those in need.</Text>
@@ -105,8 +104,8 @@ export default function Home() {
                 <Button buttonType="secondary--green" className="w-fit">Donate Now</Button>
               </div>
               <div className="flex-1 relative">
-                <Image Img={Nurse} width={480} height={510} object="center" className="h-full rounded-[30px] rounded-br-[56px]" />
-                <Image Img={CTA} width={142} height={142} object="center" className="absolute bottom-0 right-0 max-w-[115px] rotate_infinite" />
+                <Image Img={Nurse} width={480} height={510} object="center" className="h-full rounded-[30px] rounded-br-[38px] lg:rounded-br-[56px]" />
+                <Image Img={CTA} width={142} height={142} object="center" className="absolute bottom-0 right-0 max-w-[75px] lg:max-w-[115px] rotate_infinite" />
               </div>
             </div>
           </section>
@@ -142,14 +141,15 @@ export default function Home() {
             <Accordion data={FAQ_data} />
           </div>
         </section>
-      </MainLayout>
-      <section className="footer pt-56 pb-20 w-full text-center mt-[144px]">
+      </PageLayout>
+      <section className="footer pt-56 pb-20 px-1 w-full text-center mt-[144px]">
         <div className="relative w-fit mx-auto text-white">
-          <span className="text-xl font-medium text-end absolute right-0 -top-4">Begin with a single step towards kindness.</span>
-          <h2 className="text-9xl text-center ">Become a part <br /> of the future</h2>
+          <span className="font-medium text-base md:text-xl text-end absolute right-0 -top-4">Begin with a single step towards kindness.</span>
+          <h2 className="text-8xl md:text-9xl text-center">Become a part <br className="hideInSp" /> of the future</h2>
         </div>
         <Button buttonType="secondary" className="text-white w-fit mx-auto mt-[73px]">Join With Us</Button>
       </section>
+      <Footer />
     </>
   )
 }
