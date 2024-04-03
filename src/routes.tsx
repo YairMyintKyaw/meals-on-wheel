@@ -7,7 +7,8 @@ import HomeMedium from "./pages/Home/HomeMedium";
 import Meals from "./pages/Meals/Meals";
 import MealDetail from "./pages/Meals/MealDetail";
 import MealRegister from "./pages/Meals/MealRegister";
-
+import Payment from "./pages/Donation/Payment";
+import PaymentSuccess from  "./pages/Donation/PaymentSuccess";
 const routes = () => {
     return (
         <Suspense fallback="Loading...">
@@ -20,6 +21,8 @@ const routes = () => {
                 <Route path="/meals" element={<Meals />} />
                 <Route path="/meals/:id" element={<MealDetail />} />
                 <Route path="/meals/create" element={<MealRegister />} />
+                <Route path="/payment" element={<Payment />} />
+                <Route path="/success" element={<PaymentSuccess />} />
             </Routes>
         </Suspense>
     )
