@@ -1,5 +1,5 @@
 import { setUpForm } from "../../utils/utils";
-import RegisterForm from "../../components/form/Form";
+import RegisterForm from "../../components/Form/Form";
 import { useEffect, useState } from "react";
 import User, { UserType } from "../../api/user";
 
