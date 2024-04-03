@@ -1,8 +1,8 @@
-import React from 'react'
 
 const HomeDonor = () => {
+  
   return (
-    <div>HomeDonor</div>
+    <div>Hello donor</div>
   )
 }
 

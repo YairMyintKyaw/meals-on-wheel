@@ -7,6 +7,7 @@ import HomeMedium from "./pages/Home/HomeMedium";
 import Meals from "./pages/Meals/Meals";
 import MealDetail from "./pages/Meals/MealDetail";
 import MealRegister from "./pages/Meals/MealRegister";
+import Profile from "./pages/Profile/Profile";
 
 const routes = () => {
     return (
@@ -14,7 +15,8 @@ const routes = () => {
             <Routes>
                 <Route path="/" element={<HomeMedium />} />
                 <Route path="/user" element={<UserType />} />
-                <Route path="user/register/:type/info?" element={<Register />} />
+                <Route path="/user/register/:type/info?" element={<Register />} />
+                <Route path="/profile" element={<Profile />} />
                 {/* <Route path="user/update/:type" element={<AccUpdate />} /> */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/meals" element={<Meals />} />

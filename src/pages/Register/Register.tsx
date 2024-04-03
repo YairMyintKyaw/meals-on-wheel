@@ -11,7 +11,7 @@ export const Register = () => {
   const nav = useNavigate();
   const userDataform = setUpForm(type);
   const accRegisterForm = setUpForm("");
-  const [userData, setUserData] = useState({ ...userDataform.initialValues, ...accRegisterForm.initialValues })
+  const [userData, setUserData] = useState({ ...userDataform.initialValues, ...accRegisterForm.initialValues });
   const [backendErrors, setBackendErrors] = useState<any>({});
   const handleSubmit = async(values: any) => {
     Object.keys(values).forEach(function(key, index) {

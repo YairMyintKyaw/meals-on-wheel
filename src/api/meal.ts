@@ -73,6 +73,20 @@ const Meals = (function () {
       }
     )
   }
+
+  const uploadMealImg = (image:File, token:string)=>{
+    return axios.post(BASE_URL+"meal/upload",
+      {image},{
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          'Authorization':`Bearer ${token}`
+        }
+      }
+      
+    )
+  }
+
+
   const deleteMeal = async (id: number, token:string) => {
     return await axios.delete(BASE_URL+"meal/"+id,
       {
@@ -83,7 +97,7 @@ const Meals = (function () {
       }
     );
   }
-  return { getAllMeals,getPartnerMeals, createMeal, getMealDetail, updateMeal, deleteMeal }
+  return { getAllMeals,getPartnerMeals, createMeal, getMealDetail, updateMeal, deleteMeal, uploadMealImg }
 })();
 
 export default Meals;

@@ -49,21 +49,27 @@ const MealDetail = () => {
       "is_finished" : values.is_finished,
       "is_pickup" : values.is_pickup,
       "is_delivered" : values.is_delivered,
+      "image":values.image
     }
     // if(values.image){
     //   data.image= values.image
     // }
-    console.log(data);
-    console.log(mealData?.id);
-    console.log(token);
+    console.log(data.image);
+    
     if(mealData && token){
+      if(mealData.image != values.image){
+        const uploadedImg = await Meals.uploadMealImg(data.image, token);
+        const image = uploadedImg.data?.imagePath.split("/")[2];
+        data.image=image;
+      }
       const response = await Meals.updateMeal(mealData?.id, data, token).catch((error)=>setBackendErrors(error))
-      nav("/meals")
+      if(!response?.data.error) nav("/meals");
+
     }
   }
   const handleDelete = async()=>{
     console.log("This");
-    
+  
     if(mealData && token){
       const response = await Meals.deleteMeal(mealData.id, token);
       console.log(response);
@@ -75,6 +81,10 @@ const MealDetail = () => {
   }
   const handleEdit = ()=>{
     setIsEditable(true);
+  }
+
+  const handleBackToMeal = ()=>{
+    nav(-1);
   }
 
   useEffect(() => {
@@ -89,6 +99,7 @@ const MealDetail = () => {
   },[])
   return (
     <PageLayout>
+      <Button buttonType="back" className="mb-5 mt-5" handleClick={handleBackToMeal}>Back</Button>
       <div className="flex flex-col lg:flex-row mt-10 gap-10">
         <figure className="flex-1 rounded overflow-hidden aspect-square"><img src={"http://127.0.0.1:8000/uploads/meals/"+mealData.image} className="object-cover w-full h-full" alt="Meal" /></figure>
         <div className="flex-1 lg:flex-[2]">

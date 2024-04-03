@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASE_ADMIN_URL, BASE_URL } from "./constant";
 
-export type UserType = "member" | "partner" | "donor" | "caregiver" | "volunteer";
+export type UserType = "member" | "partner" | "donor" | "caregiver" | "volunteer" | "admin";
 const User = (function () {
 
   const get = (type: UserType, token:string) => {
@@ -10,6 +10,26 @@ const User = (function () {
         'Authorization':`Bearer ${token}`,
       }
     });
+  }
+
+  const getOwnProfileData=(token:string)=>{
+    return axios.get(BASE_URL + "profile" ,{
+      headers: {
+        'Authorization':`Bearer ${token}`,
+      }
+    });
+  }
+
+  const updateOwnProfile = (userData:any, id:number, token:string) => {    
+    return axios.put(BASE_URL + "profile/" + id,
+      userData,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization':`Bearer ${token}`,
+        }
+      }
+    )
   }
 
   const create = (type: UserType, userData:any, token:string, csrf:string) => {
@@ -24,24 +44,21 @@ const User = (function () {
       }
     )
   }
-  const update = (type: UserType, userData:any, id:number, token:string, csrf:string) => {
-    console.log(csrf);
+  const update = (type: UserType, userData:any, id:number, token:string) => {    
     return axios.put(BASE_ADMIN_URL + type + "/" + id,
       userData,
       {
         headers: {
-          'Content-Type': 'multipart/form-data',
+          'Content-Type': 'application/json',
           'Authorization':`Bearer ${token}`,
-          "X-CSRF-TOKEN" : csrf
         }
       }
     )
   }
-  const deleteAcc = (type: UserType, id:number, token:string, csrf:string) => {
+  const deleteAcc = (type: UserType, id:number, token:string) => {
     return axios.delete(BASE_ADMIN_URL + type + "/" + id, {
       headers: {
         'Authorization':`Bearer ${token}`,
-        "X-CSRF-TOKEN" : csrf
       }
     });
   }
@@ -58,7 +75,7 @@ const User = (function () {
     )
   }
 
-  return {get, create, update, deleteAcc, uploadImg}
+  return {get, create, update, deleteAcc, uploadImg, getOwnProfileData, updateOwnProfile}
 })();
 
 export default User;

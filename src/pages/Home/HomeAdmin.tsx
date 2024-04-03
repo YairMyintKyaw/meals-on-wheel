@@ -7,11 +7,9 @@ import AccUpdate from "../AccUpdate/AccUpdate";
 
 const HomeAdmin = () => {
   const [users, setUsers] = useState([]);
-  const {token, csrfToken} = useSelector((state: RootState) => state.user);
+  const {token, type} = useSelector((state: RootState) => state.user);
   const [currentUser, setCurrentUser] = useState<any>();
   const [isEditable, setIsEditable] = useState<boolean>();
-  const dispatch = useDispatch();
-  console.log(csrfToken);
   
   const handleChange = async(e:React.ChangeEvent<HTMLSelectElement>)=>{
     const userType:any = e.target.value;
@@ -19,7 +17,7 @@ const HomeAdmin = () => {
       const response = await User.get(userType, token);
       const profile = await response.data.Profile;
       const users = await response.data[userType];
-      console.log(userType);
+      console.log("updateddd profile",response);
       
       const userData = users.map((user:any)=>{
         const user_profile = profile.find((p:any)=>p[0].user_id==user.user_id);
@@ -29,45 +27,44 @@ const HomeAdmin = () => {
         }catch(e){
           console.log(e);
         }
-        return {...user, ...data}
+        return {...data, ...user}
       })
-      setUsers(userData)
-      console.log("user data",userData);
-      console.log("response",response);
-      console.log("hello",response?.data["CSRF Token"]);
-      dispatch(updateUser(response?.data["CSRF Token"]));
-      console.log(csrfToken);
-      
+      setUsers(userData);
     }
   }
-  const handleEditOpen = async(user:any, e)=>{    
+  const handleEditOpen = async(user:any)=>{    
     setCurrentUser(user);
     setIsEditable(!isEditable);
   }
+
+  const handleDelete = async(user:any)=>{
+    if(token) User.deleteAcc(user.user.type, user.id, token);
+  }
+
   
 
   useEffect(()=>{    
     (async ()=>{
       if(token){
         const response = await User.get("member", token);
-        const profile = response.data.Profile
-        const users = response.data.member        
+        const profile =  response.data.Profile;
+        const users =  response.data["member"];
+        console.log("updateddd profile",response);
         
         const userData = users.map((user:any)=>{
           const user_profile = profile.find((p:any)=>p[0].user_id==user.user_id);
-          console.log("user profile",user_profile[0]);
-          return {...user, ...user_profile[0]}
+          let data;
+          try{
+            data  = user_profile[0];
+          }catch(e){
+            console.log(e);
+          }
+          return {...data, ...user}
         })
-        console.log("user data", userData);
-        
         setUsers(userData);
-        console.log("user data",userData);        
-        console.log("CSRF Token",response?.data["CSRF Token"]);
-        dispatch(updateUser(response?.data["CSRF Token"]));
       }
-      // console.log("response",response?[data]?["CSRF Token"]);
     })();
-  },[])
+  },[isEditable])
 
   return (
     <>
@@ -87,21 +84,26 @@ const HomeAdmin = () => {
           <table className="w-full text-sm text-left rtl:text-right text-green-500">
             <thead className="text-xs text-white uppercase bg-green-700 ">
               <tr>
-                {users.length>0 && Object.keys(users[0]).map((user,id)=>{
+                {users.length>0 && Object.keys(users[0]).map((user:any,id)=>{
                   if(user!="created_at" && user!="updated_at" && user!="user_id" && user!="user")
                   return <th key={id} scope="col" className="px-6 py-3">{user}</th>
                 })}
+                <th className="px-6 py-3">Edit</th>
+                <th className="px-6 py-3">Delete</th>
               </tr>
             </thead>
             <tbody>
               {
                 users.map((user:any,index)=>{
                   user["edit"]=true;
+                  user["delete"]=true;
                   
                   return  <tr key={index}>
                     {Object.keys(user).map((key,index)=>{
                       if(key==="edit"){
-                        return <td key={index}><button onClick={handleEditOpen.bind(this, user)} >Edit</button></td>
+                        return <td key={index} className="px-6 py-4 text-green-800"><button onClick={handleEditOpen.bind(this, user)} >Edit</button></td>
+                      }else if(key==="delete"){
+                        return <td key={index} className="px-6 py-4 text-red-800"><button onClick={handleDelete.bind(this, user)} >Delete</button></td>
                       }
                       if(key!="created_at" && key!="updated_at" && key!="user_id" && key!="user"){
                         return <td key={index} className="px-6 py-4 text-black">{user[key]}</td>
@@ -115,7 +117,7 @@ const HomeAdmin = () => {
           </table>
         </div>
   
-      </div>:<AccUpdate data={currentUser} type={currentUser?.user?.type} csrf={csrfToken} token={token}/>
+      </div>:<AccUpdate data={currentUser} type={currentUser?.user?.type} token={token} closeEdit={setIsEditable}/>
       }
     </>
   )
