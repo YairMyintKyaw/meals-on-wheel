@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import User, { UserType } from "../../api/user";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
@@ -7,17 +7,17 @@ import AccUpdate from "../AccUpdate/AccUpdate";
 
 const HomeAdmin = () => {
   const [users, setUsers] = useState([]);
-  const {token, type} = useSelector((state: RootState) => state.user);
+  const {token} = useSelector((state: RootState) => state.user);
+  const ref = useRef(null);
   const [currentUser, setCurrentUser] = useState<any>();
   const [isEditable, setIsEditable] = useState<boolean>();
   
   const handleChange = async(e:React.ChangeEvent<HTMLSelectElement>)=>{
     const userType:any = e.target.value;
     if(token){
-      const response = await User.get(userType, token);
-      const profile = await response.data.Profile;
-      const users = await response.data[userType];
-      console.log("updateddd profile",response);
+      const response = await User.get(userType, token).catch(e=>setUsers([]));
+      const profile = await response?.data.Profile;
+      const users = await response?.data[userType];
       
       const userData = users.map((user:any)=>{
         const user_profile = profile.find((p:any)=>p[0].user_id==user.user_id);
@@ -38,19 +38,13 @@ const HomeAdmin = () => {
   }
 
   const handleDelete = async(user:any)=>{
-    if(token) User.deleteAcc(user.user.type, user.id, token);
-  }
-
-  
-
-  useEffect(()=>{    
-    (async ()=>{
-      if(token){
-        const response = await User.get("member", token);
-        const profile =  response.data.Profile;
-        const users =  response.data["member"];
-        console.log("updateddd profile",response);
-        
+    if(token) {
+      const response = await User.deleteAcc(user.user.type, user.id, token);
+      if(response.data.message && ref.current){
+        const userType:any = (ref.current as HTMLSelectElement).value;
+        const response = await User.get(userType, token).catch(e=>setUsers([]));
+        const profile = await response?.data.Profile;
+        const users = await response?.data[userType];
         const userData = users.map((user:any)=>{
           const user_profile = profile.find((p:any)=>p[0].user_id==user.user_id);
           let data;
@@ -61,7 +55,34 @@ const HomeAdmin = () => {
           }
           return {...data, ...user}
         })
-        setUsers(userData);
+        setUsers(userData); 
+      }      
+      
+    };
+  }
+
+  
+
+  useEffect(()=>{    
+    (async ()=>{
+      if(token){
+        const response = await User.get("member", token).catch(e=>setUsers([]));
+        const profile =  response?.data.Profile;
+        const users =  response?.data["member"];
+        
+        if(users){
+          const userData = users.map((user:any)=>{
+            const user_profile = profile.find((p:any)=>p[0].user_id==user.user_id);
+            let data;
+            try{
+              data  = user_profile[0];
+            }catch(e){
+              console.log(e);
+            }
+            return {...data, ...user}
+          })
+          setUsers(userData);
+        }
       }
     })();
   },[isEditable])
@@ -72,7 +93,7 @@ const HomeAdmin = () => {
         <div>
         <div className="flex justify-between items-center">
           <h2 className="text-2xl text-green-800 font-bold mt-10 mb-5 uppercase pb-1 border-b">User management</h2>
-          <select  onChange={handleChange} className="h-fit py-2 px-3 shadow text-green-800 rounded">
+          <select ref={ref}  onChange={handleChange} className="h-fit py-2 px-3 shadow text-green-800 rounded">
             <option value="member">Member</option>
             <option value="caregiver">Care Giver</option>
             <option value="partner">Partner</option>
@@ -88,8 +109,10 @@ const HomeAdmin = () => {
                   if(user!="created_at" && user!="updated_at" && user!="user_id" && user!="user")
                   return <th key={id} scope="col" className="px-6 py-3">{user}</th>
                 })}
-                <th className="px-6 py-3">Edit</th>
-                <th className="px-6 py-3">Delete</th>
+                {users.length>0 ? <>
+                  <th className="px-6 py-3">Edit</th>
+                  <th className="px-6 py-3">Delete</th>
+                </>:<th className="text-xl text-white py-3 px-5 font-bold ">There is no account for this type</th>}
               </tr>
             </thead>
             <tbody>

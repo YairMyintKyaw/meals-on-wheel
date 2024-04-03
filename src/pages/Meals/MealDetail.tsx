@@ -2,7 +2,6 @@ import { useNavigate, useParams } from "react-router-dom"
 import PageLayout from "../../components/Layout/PageLayout";
 import { useEffect, useState } from "react";
 import Meals, { MealsInterface } from "../../api/meal";
-import Img from "../../assets/images/dummy_meal.jpg"
 import Button from "../../components/Button/Button";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
@@ -67,9 +66,12 @@ const MealDetail = () => {
 
     }
   }
-  const handleDelete = async()=>{
-    console.log("This");
-  
+
+  const handlePurchase = async ()=>{
+    console.log(mealData);
+  }
+
+  const handleDelete = async()=>{  
     if(mealData && token){
       const response = await Meals.deleteMeal(mealData.id, token);
       console.log(response);
@@ -89,11 +91,10 @@ const MealDetail = () => {
 
   useEffect(() => {
     (async () => {
-      // console.log(Boolean(id && token));
       if(id && token){
         const response = await Meals.getMealDetail(parseInt(id), token);
         setMealData(response.data.meal);
-        console.log(response.data.meal);
+        console.log(response.data.meal);        
       }
     })();
   },[])
@@ -134,13 +135,13 @@ const MealDetail = () => {
                 </section>
               </div>
               {
-                type==="partner" || "admin"?
+                type==="partner" || type === "admin"?
                 <div>
                   <Button handleClick={handleEdit} buttonType="primary" className="max-w-[200px] mt-5">Edit</Button>
                   <Button handleClick={handleDelete} buttonType="primary" className="max-w-[200px] mt-5 bg-red-800">Delete</Button>
                 </div>:
                 <div>
-                  <Button buttonType="primary" className="max-w-[200px] mt-5">Get this</Button>
+                  <Button handleClick={handlePurchase} buttonType="primary" className="max-w-[200px] mt-5">Get this</Button>
                 </div>
               }
             </>

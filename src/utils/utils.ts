@@ -136,7 +136,7 @@ export const setUpForm = (formType: string | undefined): any => {
         { name: "address", label: "Delivery Address", type: "text" },
         { name: "phone_number", label: "Phone Number", type: "number" },
         { name: "shop_name", label: "Shop Name", type: "text" },
-        { name: "shop_address", label: "Shop address with member", type: "text" },
+        { name: "shop_address", label: "Shop address", type: "text" },
         { name: "image", label: "Profile Picture", type: "file", accept: "image/png, image/jpeg" }
       ];
       const initialValues: FormValues = {
@@ -253,10 +253,10 @@ export const setUpForm = (formType: string | undefined): any => {
       }        
       const validationSchema: ObjectSchema<FormValues> = object({
         name: string().required("First Name is required"),
-        ingredients: string().required("Last Name is required"),
-        allergy_information: string().required("Gender is required"),
-        nutritional_information: string().required("Phone Number is required"),
-        dietary_restrictions: string().required("Delivery Status is required"),
+        ingredients: string().required("Ingredients is required"),
+        allergy_information: string().required("Allergy information is required"),
+        nutritional_information: string().required("Nutritional information is required"),
+        dietary_restrictions: string().required("Dietary restrictions is required"),
       });
       const fields: FieldConfig[] = [
         { name: "name", label: "Name", type: "text" },
