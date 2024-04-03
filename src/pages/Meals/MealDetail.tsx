@@ -2,10 +2,10 @@ import { useNavigate, useParams } from "react-router-dom"
 import PageLayout from "../../components/Layout/PageLayout";
 import { useEffect, useState } from "react";
 import Meals, { MealsInterface } from "../../api/meal";
-import Button from "../../components/Button/Button";
+import Button from "../../components/button/Button";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import RegisterForm from "../../components/Form/Form";
+import RegisterForm from "../../components/form/Form";
 import { setUpForm } from "../../utils/utils";
 
 const MealDetail = () => {

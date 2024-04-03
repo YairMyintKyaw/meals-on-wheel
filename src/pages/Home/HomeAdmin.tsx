@@ -20,7 +20,7 @@ const HomeAdmin = () => {
       const users = await response?.data[userType];
       
       const userData = users.map((user:any)=>{
-        const user_profile = profile.find((p:any)=>p[0].user_id==user.user_id);
+        const user_profile = profile.find((p:any)=>p[0]?.user_id == user?.user_id);
         let data;
         try{
           data  = user_profile[0];
@@ -39,14 +39,14 @@ const HomeAdmin = () => {
 
   const handleDelete = async(user:any)=>{
     if(token) {
-      const response = await User.deleteAcc(user.user.type, user.id, token);
+      const response = await User.deleteAcc(user?.user?.type, user?.id, token);
       if(response.data.message && ref.current){
         const userType:any = (ref.current as HTMLSelectElement).value;
         const response = await User.get(userType, token).catch(e=>setUsers([]));
         const profile = await response?.data.Profile;
         const users = await response?.data[userType];
         const userData = users.map((user:any)=>{
-          const user_profile = profile.find((p:any)=>p[0].user_id==user.user_id);
+          const user_profile = profile.find((p:any)=>p[0]?.user_id==user?.user_id);
           let data;
           try{
             data  = user_profile[0];
@@ -72,7 +72,7 @@ const HomeAdmin = () => {
         
         if(users){
           const userData = users.map((user:any)=>{
-            const user_profile = profile.find((p:any)=>p[0].user_id==user.user_id);
+            const user_profile = profile.find((p:any)=>p[0]?.user_id==user?.user_id);
             let data;
             try{
               data  = user_profile[0];
