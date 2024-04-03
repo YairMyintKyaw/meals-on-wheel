@@ -2,7 +2,6 @@ import { useNavigate, useParams } from "react-router-dom"
 import PageLayout from "../../components/Layout/PageLayout";
 import { useEffect, useState } from "react";
 import Meals, { MealsInterface } from "../../api/meal";
-import Img from "../../assets/images/dummy_meal.jpg"
 import Button from "../../components/button/Button";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
@@ -49,21 +48,30 @@ const MealDetail = () => {
       "is_finished" : values.is_finished,
       "is_pickup" : values.is_pickup,
       "is_delivered" : values.is_delivered,
+      "image":values.image
     }
     // if(values.image){
     //   data.image= values.image
     // }
-    console.log(data);
-    console.log(mealData?.id);
-    console.log(token);
+    console.log(data.image);
+    
     if(mealData && token){
+      if(mealData.image != values.image){
+        const uploadedImg = await Meals.uploadMealImg(data.image, token);
+        const image = uploadedImg.data?.imagePath.split("/")[2];
+        data.image=image;
+      }
       const response = await Meals.updateMeal(mealData?.id, data, token).catch((error)=>setBackendErrors(error))
-      nav("/meals")
+      if(!response?.data.error) nav("/meals");
+
     }
   }
-  const handleDelete = async()=>{
-    console.log("This");
-    
+
+  const handlePurchase = async ()=>{
+    console.log(mealData);
+  }
+
+  const handleDelete = async()=>{  
     if(mealData && token){
       const response = await Meals.deleteMeal(mealData.id, token);
       console.log(response);
@@ -77,18 +85,22 @@ const MealDetail = () => {
     setIsEditable(true);
   }
 
+  const handleBackToMeal = ()=>{
+    nav(-1);
+  }
+
   useEffect(() => {
     (async () => {
-      // console.log(Boolean(id && token));
       if(id && token){
         const response = await Meals.getMealDetail(parseInt(id), token);
         setMealData(response.data.meal);
-        console.log(response.data.meal);
+        console.log(response.data.meal);        
       }
     })();
   },[])
   return (
     <PageLayout>
+      <Button buttonType="back" className="mb-5 mt-5" handleClick={handleBackToMeal}>Back</Button>
       <div className="flex flex-col lg:flex-row mt-10 gap-10">
         <figure className="flex-1 rounded overflow-hidden aspect-square"><img src={"http://127.0.0.1:8000/uploads/meals/"+mealData.image} className="object-cover w-full h-full" alt="Meal" /></figure>
         <div className="flex-1 lg:flex-[2]">
@@ -123,13 +135,13 @@ const MealDetail = () => {
                 </section>
               </div>
               {
-                type==="partner" || "admin"?
+                type==="partner" || type === "admin"?
                 <div>
                   <Button handleClick={handleEdit} buttonType="primary" className="max-w-[200px] mt-5">Edit</Button>
                   <Button handleClick={handleDelete} buttonType="primary" className="max-w-[200px] mt-5 bg-red-800">Delete</Button>
                 </div>:
                 <div>
-                  <Button buttonType="primary" className="max-w-[200px] mt-5">Get this</Button>
+                  <Button handleClick={handlePurchase} buttonType="primary" className="max-w-[200px] mt-5">Get this</Button>
                 </div>
               }
             </>

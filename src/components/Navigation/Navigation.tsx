@@ -10,6 +10,7 @@ import { RootState } from "../../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { clearUser, userType } from "../../store/userSlice";
 import Auth from "../../api/auth";
+import { CgProfile } from "react-icons/cg";
 
 const userNav = {
   "member":[
@@ -55,14 +56,17 @@ const userNav = {
     }
   ],
 }
+
 const Navigation = () => {
   const [isDropdownActive, setIsDropdownActive] = useState(false)
   const [isSlidebarActive, setIsSlidebarActive] = useState(false)
   const dispatch = useDispatch();
   const {type, token}:{type:userType, token:string|null} = useSelector((state: RootState) => state.user);
-  console.log(type);
-  
   const nav = useNavigate();
+  
+  const handleProfile = ()=>{
+    nav("/profile");
+  }
   const handleClick = () => {
     setIsDropdownActive(!isDropdownActive);
   }
@@ -135,8 +139,9 @@ const Navigation = () => {
         <Button handleClick={navigateToSignIn} buttonType="secondary">Sign in</Button>
         <Button handleClick={navigateToSignUp} className="" buttonType="secondary--green">Sign up</Button>
       </div>:
-      <div className="hidden nav:flex gap-2 items-center">
+      <div className="hidden nav:flex gap-3 items-center">
         <Button handleClick={handleLogout} className="" buttonType="secondary--green">Sign out</Button>
+        <button onClick={handleProfile}><CgProfile className="text-3xl text-green-800"/></button>
       </div>
     }
     <div className="flex nav:hidden items-center">

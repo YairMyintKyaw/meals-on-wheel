@@ -12,7 +12,6 @@ const MealRegister = () => {
   const [backendErrors, setBackendErrors] = useState();
   const {token, type} = useSelector((state: RootState) => state.user);
   const nav = useNavigate();
-  console.log(token);
   
   const handleSubmit = async(values:any) => {
     if(token){
@@ -26,7 +25,7 @@ const MealRegister = () => {
       console.log(data);
       // console.log(token);
       const response = await Meals.createMeal(data,token).catch(error=>setBackendErrors(error));
-      console.log("response:", response);
+      if(response?.data.meal) nav("/meals");
     }
   }
   useEffect(()=>{

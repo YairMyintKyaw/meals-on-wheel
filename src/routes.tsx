@@ -9,13 +9,16 @@ import MealDetail from "./pages/Meals/MealDetail";
 import MealRegister from "./pages/Meals/MealRegister";
 import Payment from "./pages/Donation/Payment";
 import PaymentSuccess from  "./pages/Donation/PaymentSuccess";
+import Profile from "./pages/Profile/Profile";
+
 const routes = () => {
     return (
         <Suspense fallback="Loading...">
             <Routes>
                 <Route path="/" element={<HomeMedium />} />
                 <Route path="/user" element={<UserType />} />
-                <Route path="user/register/:type/info?" element={<Register />} />
+                <Route path="/user/register/:type/info?" element={<Register />} />
+                <Route path="/profile" element={<Profile />} />
                 {/* <Route path="user/update/:type" element={<AccUpdate />} /> */}
                 <Route path="/login" element={<Login />} />
                 <Route path="/meals" element={<Meals />} />
