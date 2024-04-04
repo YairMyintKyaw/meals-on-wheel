@@ -19,8 +19,8 @@ const userNav = {
       nav:"/"
     },
     {
-      name:"Profile",
-      nav:"/t"
+      name:"Order",
+      nav:"/order"
     }
   ],
   "partner":[

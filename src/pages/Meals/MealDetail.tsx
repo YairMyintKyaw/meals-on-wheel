@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import RegisterForm from "../../components/Form/Form";
 import { setUpForm } from "../../utils/utils";
+import Order from "../../api/order";
 
 const MealDetail = () => {
   const { id } = useParams();
@@ -28,7 +29,7 @@ const MealDetail = () => {
     "is_delivered": "false",
   });
   const [isEditable, setIsEditable] = useState<boolean>(false);
-  const [isConfirm, setIsConfirm] = useState<boolean>(true);
+  const [isConfirm, setIsConfirm] = useState<boolean>(false);
   const [backendErrors, setBackendErrors] = useState<any>({});
   const { type, token } = useSelector((state: RootState) => state.user);
   const { validationSchema, fields } = setUpForm("meal");
@@ -70,6 +71,10 @@ const MealDetail = () => {
 
   const handlePurchase = async () => {
     console.log(mealData);
+    if (mealData && token) {
+      const response = await Order.register(mealData, token);
+      console.log(response);
+    }
   }
 
   const handleDelete = async () => {
@@ -91,11 +96,11 @@ const MealDetail = () => {
   }
 
   const handleShowConfirm = ()=>{
-    setIsConfirm(false);
+    setIsConfirm(true);
   }
 
   const handleHideConfirm = ()=>{
-    setIsConfirm(true);
+    setIsConfirm(false);
   }
 
   useEffect(() => {
@@ -151,10 +156,11 @@ const MealDetail = () => {
                     </div> :
                     <div>
                       {isConfirm ? <>
+                        <p className="text-green-800 font-bold pt-5 capitalize">Are you sure if this meal is suitable for you?</p>
                         <Button handleClick={handlePurchase} buttonType="primary" className="max-w-[200px] mt-5">Confirm</Button>
-                        <Button handleClick={handleShowConfirm} buttonType="primary" className="bg-red-800 max-w-[200px] mt-5">Go Back</Button>
+                        <Button handleClick={handleHideConfirm} buttonType="primary" className="bg-red-800 max-w-[200px] mt-5">Go Back</Button>
                       </> :
-                        <Button handleClick={handlePurchase} buttonType="primary" className="max-w-[200px] mt-5">Get this</Button>
+                        <Button handleClick={handleShowConfirm} buttonType="primary" className="max-w-[200px] mt-16">Place Order</Button>
                       }
                     </div>
                   }

@@ -8,6 +8,7 @@ import Meals from "./pages/Meals/Meals";
 import MealDetail from "./pages/Meals/MealDetail";
 import MealRegister from "./pages/Meals/MealRegister";
 import Profile from "./pages/Profile/Profile";
+import Order from "./pages/Order/Order";
 
 const routes = () => {
     return (
@@ -22,6 +23,7 @@ const routes = () => {
                 <Route path="/meals" element={<Meals />} />
                 <Route path="/meals/:id" element={<MealDetail />} />
                 <Route path="/meals/create" element={<MealRegister />} />
+                <Route path="/order" element={<Order />} />
             </Routes>
         </Suspense>
     )
