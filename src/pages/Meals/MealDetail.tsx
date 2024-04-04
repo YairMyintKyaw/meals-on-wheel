@@ -73,7 +73,9 @@ const MealDetail = () => {
     console.log(mealData);
     if (mealData && token) {
       const response = await Order.register(mealData, token);
-      console.log(response);
+      if(response.data["ordered meal"]){
+        nav("/order")
+      }
     }
   }
 

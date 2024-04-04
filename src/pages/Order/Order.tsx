@@ -37,8 +37,9 @@ const Order = () => {
                 <h1 className="text-2xl font-bold text-green-800">Orders</h1>
                 <button onClick={handleUpdateStatus}><BiRefresh className="text-green-800 text-3xl"/></button>
             </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {
-                orders?.map((order:any)=><section key={order.id} className="flex items-center shadow-lg mb-5">
+                orders?.map((order:any)=><section key={order.id} className="flex flex-col lg:flex gap-5 shadow-lg mb-5 py-7 px-10 border">
                     <figure className="rounded overflow-hidden aspect-square max-w-[300px]"><img src={"http://127.0.0.1:8000/uploads/meals/" + order.image} className="object-cover w-full h-full" alt="Meal" /></figure>
                     <div className="flex-1 py-3">
                         <h1 className="font-bold text-2xl mb-3">{order.name}</h1>
@@ -56,6 +57,7 @@ const Order = () => {
                     </div>
                 </section>)
             }
+            </div>
         </div>
     </PageLayout>
   )

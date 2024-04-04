@@ -12,18 +12,17 @@ const HomePartner = () => {
 
   const handleStartPrepare = async(id:number)=>{
     if(token){
-      const response = await Order.updateStatus(id, "is_preparing", token);
-      console.log(response);
-      const orderData = response.data["Updated Ordered Meal"];
-      setOrders(orderData)
+      await Order.updateStatus(id, "is_preparing", token);
+      const updatedOrderData = await Order.getOrder(token);
+      setOrders(updatedOrderData.data.Orders);
+      
     }
   }
   const handleFinish = async(id:number)=>{
     if(token){
-      const response = await Order.updateStatus(id, "is_finished", token);
-      const orderData = response.data["Updated Ordered Meal"];
-      setOrders(orderData)
-
+      await Order.updateStatus(id, "is_finished", token);
+      const updatedOrderData = await Order.getOrder(token);
+      setOrders(updatedOrderData.data.Orders);
     }
   }
   useEffect(() => {
@@ -34,22 +33,20 @@ const HomePartner = () => {
         const response = await Order.getOrder(token);
         setOrders(response.data.Orders);
       }
-      console.log(orders);
-      
     })()
   }, [])
   return (
     <div className="mt-10 min-h-[80vh]">
+      <h2 className="text-3xl mb-5 font-bold text-green-800">Orders</h2>
       {orders?.length <= 0 ? (
         <>
-          <h2 className="text-3xl mb-5">Orders</h2>
           <p>You have no order yet</p>
         </>
       ) : (
-        <>
-          {orders?.map((order: any) => (
-            <section key={order.id} className="flex items-center shadow-lg mb-5">
-              <figure className="rounded overflow-hidden aspect-square max-w-[300px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {orders.length>0 && orders?.map((order: any) => (
+            <section key={order.id} className="flex flex-col shadow-lg mb-5 py-7 px-10">
+              <figure className="rounded overflow-hidden mx-auto aspect-square max-w-[300px]">
                 <img src={"http://127.0.0.1:8000/uploads/meals/" + order.image} className="object-cover w-full h-full" alt="Meal" />
               </figure>
               <div className="flex-1 py-3">
@@ -62,7 +59,7 @@ const HomePartner = () => {
               </div>
             </section>
           ))}
-        </>
+        </div>
       )}
     </div>
   );
