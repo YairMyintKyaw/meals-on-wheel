@@ -1,6 +1,6 @@
 import MainLayout from "./MainLayout"
 import Img from "../../assets/images/img_auth.jpg";
-import Button from "../button/Button";
+import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 
 const AuthLayout = ({ title, children }: { title: string, children: React.ReactNode }) => {

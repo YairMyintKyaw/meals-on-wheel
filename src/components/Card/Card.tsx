@@ -1,5 +1,5 @@
 import { cn } from "../../utils/utils"
-import Button from "../button/Button"
+import Button from "../Button/Button"
 type Props = {
   title: string,
   description: string,

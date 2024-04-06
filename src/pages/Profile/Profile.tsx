@@ -4,8 +4,8 @@ import { RootState } from "../../store/store";
 import { useEffect, useState } from "react";
 import User from "../../api/user";
 import { setUpForm } from "../../utils/utils";
-import RegisterForm from "../../components/form/Form";
-import Button from "../../components/button/Button";
+import RegisterForm from "../../components/Form/Form";
+import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 
 function flattenObject(obj: any, parentKey = ''): { [key: string]: any } {

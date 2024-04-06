@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import Order from "../../api/order";
-import Button from "../../components/button/Button";
+import Button from "../../components/Button/Button";
 
 type orderType = {
   order: any, partner_shop_address: string, member_address: string, caregiver_address: string

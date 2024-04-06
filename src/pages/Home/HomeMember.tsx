@@ -11,9 +11,7 @@ const HomeMember = () => {
   useEffect(()=>{
     (async ()=>{
       if(token){
-        const response = await Meals.getAllMeals(token).catch(e=>console.log(e));
-        console.log(response?.data["meals by township"]);
-        
+        const response = await Meals.getAllMeals(token).catch(e=>console.log(e));        
         if(response?.data["meals by township"]) 
           setMeals(response.data["meals by township"]); 
       }

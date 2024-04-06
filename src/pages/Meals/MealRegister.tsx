@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import RegisterForm from "../../components/form/Form";
+import RegisterForm from "../../components/Form/Form";
 import PageLayout from "../../components/Layout/PageLayout"
 import { setUpForm } from "../../utils/utils";
 import Meals from "../../api/meal";

@@ -32,8 +32,8 @@ const Meals = () => {
           <h2 className="text-2xl text-green-800 font-bold">Meals</h2>
           <button onClick={handleClick} className="bg-green-800 rounded-full text-white text-2xl p-1"><BiPlus /></button>
         </div>
-        <div className="mt-5 flex gap-3 flex-wrap">
-          {meals?meals.map(meal=><MealCard key={meal.id} id={meal.id} name={meal.name} img={meal.image}/>):"You do not have any meal yet. Do you want to create one?"}
+        <div className="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {meals?meals.map(meal=><MealCard key={meal.id} id={(meal.id).toString()} name={meal.name} img={meal.image}/>):"You do not have any meal yet. Do you want to create one?"}
         </div>
       </section>
     </PageLayout>

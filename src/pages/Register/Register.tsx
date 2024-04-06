@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom"
 import { cn, setUpForm } from "../../utils/utils";
-import RegisterForm from "../../components/form/Form";
+import RegisterForm from "../../components/Form/Form";
 import AuthLayout from "../../components/Layout/AuthLayout";
 import { useEffect, useState } from "react";
 import Auth from "../../api/auth";

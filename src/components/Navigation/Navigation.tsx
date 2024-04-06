@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../assets/images/img_logo01.png"
-import Button from "../button/Button";
+import Button from "../Button/Button";
 import "./style.css"
 import { useState } from "react";
 import { cn } from "../../utils/utils";
@@ -53,10 +53,6 @@ const userNav = {
     {
       name:"Home",
       nav:"/"
-    },
-    {
-      name:"Meals",
-      nav:"/meals"
     }
   ],
 }
