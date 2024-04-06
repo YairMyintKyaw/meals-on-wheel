@@ -332,6 +332,7 @@ export const setUpForm = (formType: string | undefined): any => {
         phone_number: string | number;
         date_of_birth: string;
         address: string;
+        township:string;
         image: string
       }
       const validationSchema: ObjectSchema<FormValues> = object({
@@ -340,6 +341,7 @@ export const setUpForm = (formType: string | undefined): any => {
         gender: string().required("Gender is required"),
         phone_number: string().required("Phone Number is required"),
         date_of_birth: string().required("Date of birth is required"),
+        township: string().required("Township is required"),
         address: string().required("Address is required"),
         
       });
@@ -355,6 +357,61 @@ export const setUpForm = (formType: string | undefined): any => {
         { name: "phone_number", label: "Phone Number", type: "number" },
         { name: "date_of_birth", label: "Date Of Birth", type: "date" },
         { name: "address", label: "Delivery Address", type: "text" },
+        {
+          name: "township",
+          label: "Township",
+          type: "select",
+          options: [
+            "Botataung",
+            "City",
+            "Dagon Seikkan",
+            "Dawbon",
+            "East Dagon",
+            "Mingala Taungnyunt",
+            "North Dagon",
+            "North Okkalapa",
+            "Pazundaung",
+            "South Dagon",
+            "South Okkalapa",
+            "Tamwe",
+            "Thaketa",
+            "Thingangyun",
+            "Yankin",
+            "Hlaingthaya",
+            "Hlegu",
+            "Hmawbi",
+            "Htantabin",
+            "Insein",
+            "Mingaladon",
+            "Shwepyitha",
+            "Taikkyi",
+            "Cocokyun",
+            "Dala",
+            "Kawhmu",
+            "Kayan",
+            "Kungyangon",
+            "Kyauktan",
+            "Rural",
+            "Seikkyi Kanaungto",
+            "Tada",
+            "Thanlyin",
+            "Thongwa",
+            "Twante",
+            "Ahlon",
+            "Bahan",
+            "Dagon",
+            "Hlaing",
+            "Kamayut",
+            "Kyauktada",
+            "Kyimyindaing",
+            "Lanmadaw",
+            "Latha",
+            "Mayangon",
+            "Pabedan",
+            "Sanchaung",
+            "Seikkan"
+          ],
+        },
         { name: "image", label: "Profile Picture", type: "file", accept: "image/png, image/jpeg" }
       ];
       const initialValues: FormValues = {
@@ -364,6 +421,7 @@ export const setUpForm = (formType: string | undefined): any => {
         phone_number: "",
         date_of_birth: "",
         address: "",
+        township:"",
         image: ""
       };
       return { initialValues, validationSchema, fields };
