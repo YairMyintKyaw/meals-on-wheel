@@ -20,7 +20,8 @@ export const setUpForm = (formType: string | undefined): any => {
         date_of_birth: string;
         address: string;
         dietary_restriction: string;
-        image: string 
+        township:string;
+        image: string
       }
       const validationSchema: ObjectSchema<FormValues> = object({
         first_name: string().required("First Name is required"),
@@ -31,6 +32,7 @@ export const setUpForm = (formType: string | undefined): any => {
         emergency_contact_number: string().required("Phone Number is required"),
         date_of_birth: string().required("Date of Birth is required"),
         address: string().required("Address is required"),
+        township: string().required("Township is required"),
         dietary_restriction: string().required("Dietary Restrictions is required"),
       });
       const fields: FieldConfig[] = [
@@ -82,7 +84,6 @@ export const setUpForm = (formType: string | undefined): any => {
             "Kayan",
             "Kungyangon",
             "Kyauktan",
-            "Rural",
             "Seikkyi Kanaungto",
             "Tada",
             "Thanlyin",
@@ -90,7 +91,6 @@ export const setUpForm = (formType: string | undefined): any => {
             "Twante",
             "Ahlon",
             "Bahan",
-            "City",
             "Dagon",
             "Hlaing",
             "Kamayut",
@@ -116,6 +116,7 @@ export const setUpForm = (formType: string | undefined): any => {
         emergency_contact_number: "",
         date_of_birth: "",
         address: "",
+        township:"",
         dietary_restriction: "",
         image:""
       };
@@ -130,6 +131,7 @@ export const setUpForm = (formType: string | undefined): any => {
         date_of_birth: string;
         address: string;
         relationship_with_member:string;
+        township:string;
         image: string
       }
       const validationSchema: ObjectSchema<FormValues> = object({
@@ -139,6 +141,7 @@ export const setUpForm = (formType: string | undefined): any => {
         phone_number: string().required("Phone Number is required"),
         date_of_birth: string().required("Date of Birth is required"),
         relationship_with_member: string().required("Date of Birth is required"),
+        township: string().required("Township is required"),
         address: string().required("Address is required"),
         
       });
@@ -180,7 +183,6 @@ export const setUpForm = (formType: string | undefined): any => {
             "Htantabin",
             "Insein",
             "Mingaladon",
-            "Rural",
             "Shwepyitha",
             "Taikkyi",
             "Cocokyun",
@@ -197,7 +199,6 @@ export const setUpForm = (formType: string | undefined): any => {
             "Twante",
             "Ahlon",
             "Bahan",
-            "City",
             "Dagon",
             "Hlaing",
             "Kamayut",
@@ -222,6 +223,7 @@ export const setUpForm = (formType: string | undefined): any => {
         date_of_birth: "",
         address: "",
         relationship_with_member:"",
+        township:"",
         image: ""
       };
       return { initialValues, validationSchema, fields };
@@ -233,6 +235,7 @@ export const setUpForm = (formType: string | undefined): any => {
         address: string;
         phone_number: string | number;
         shop_name:string;
+        township:string;
         shop_address:string;
         image: string
       }
@@ -242,6 +245,7 @@ export const setUpForm = (formType: string | undefined): any => {
         address: string().required("Address is required"),
         phone_number: string().required("Phone Number is required"),
         shop_name: string().required("Shop name is required"),
+        township: string().required("Township is required"),
         shop_address: string().required("Shop address is required"),
       });
       const fields: FieldConfig[] = [
@@ -276,7 +280,6 @@ export const setUpForm = (formType: string | undefined): any => {
             "Htantabin",
             "Insein",
             "Mingaladon",
-            "Rural",
             "Shwepyitha",
             "Taikkyi",
             "Cocokyun",
@@ -293,7 +296,6 @@ export const setUpForm = (formType: string | undefined): any => {
             "Twante",
             "Ahlon",
             "Bahan",
-            "City",
             "Dagon",
             "Hlaing",
             "Kamayut",
@@ -317,6 +319,7 @@ export const setUpForm = (formType: string | undefined): any => {
         phone_number: "",
         shop_name: "",
         shop_address:"",
+        township:"",
         image: ""
       };
       return { initialValues, validationSchema, fields };
@@ -373,6 +376,7 @@ export const setUpForm = (formType: string | undefined): any => {
         phone_number: string | number;
         date_of_birth: string;
         address: string;
+        township:string;
         image: string
       }
       const validationSchema: ObjectSchema<FormValues> = object({
@@ -381,6 +385,7 @@ export const setUpForm = (formType: string | undefined): any => {
         gender: string().required("Gender is required"),
         phone_number: string().required("Phone Number is required"),
         date_of_birth: string().required("Date of birth is required"),
+        township: string().required("Township is required"),
         address: string().required("Address is required"),
         
       });
@@ -421,7 +426,6 @@ export const setUpForm = (formType: string | undefined): any => {
             "Htantabin",
             "Insein",
             "Mingaladon",
-            "Rural",
             "Shwepyitha",
             "Taikkyi",
             "Cocokyun",
@@ -438,7 +442,6 @@ export const setUpForm = (formType: string | undefined): any => {
             "Twante",
             "Ahlon",
             "Bahan",
-            "City",
             "Dagon",
             "Hlaing",
             "Kamayut",
@@ -462,6 +465,7 @@ export const setUpForm = (formType: string | undefined): any => {
         phone_number: "",
         date_of_birth: "",
         address: "",
+        township:"",
         image: ""
       };
       return { initialValues, validationSchema, fields };

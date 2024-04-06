@@ -21,7 +21,6 @@ const Button = (
                 { "back-button flex items-center gap-[16px] w-fit py-1 border-none text-black font-medium hover:shadow-none hover:-translate-y-0": buttonType === "back" },
                 { "hover:shadow-lg hover:-translate-y-1": buttonType === undefined },
                 className,
-
             )}
             onClick={handleClick}
         >

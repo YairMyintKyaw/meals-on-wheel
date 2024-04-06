@@ -33,9 +33,9 @@ const HomeRider = () => {
     (async () => {
       if (token) {
         const response = await Order.getOrderRider(token);
+        console.log(response);
+        
         setOrders(response.data.order_details);
-        console.log(user);
-
       }
     })()
   }, [])
@@ -44,7 +44,7 @@ const HomeRider = () => {
     <>
       <h1 className=" mt-10 mb-5 font-bold text-3xl text-green-800 ">Avaiable Delivery Routes</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {orders?.length > 0 && orders
+        {orders?.length > 0 ? orders
         .filter(({order}:orderType)=>!order.volunteer_id || order.volunteer_id==user.id)
         .map(({ order, partner_shop_address, member_address, caregiver_address }: orderType) =>
           order?.is_finished && <section key={order?.id} className="flex flex-col lg:flex gap-5 shadow-lg mb-5 py-7 px-10 border">
@@ -65,7 +65,7 @@ const HomeRider = () => {
               </div>
 
             </div>
-          </section>)
+          </section>):<p className="text-green-800">There is no meal to order currently...</p>
         }
       </div>
     </>

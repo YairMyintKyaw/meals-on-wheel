@@ -22,7 +22,7 @@ export interface MealsInterface {
 
 const Meals = (function () {
   const getAllMeals = async (token:string) => {
-    return await axios.get(BASE_URL + "meals",
+    return await axios.get(BASE_URL + "meal",
       {
         headers: {
           'Content-Type': 'application/json',
@@ -60,6 +60,16 @@ const Meals = (function () {
       }
     });
   }
+
+  const getPartnerMealDetail = async (id: number, token:string) => {
+    return await axios.get(BASE_URL+"showPartnerMeal/"+id,{
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization':`Bearer ${token}`
+      }
+    })
+  }
+
   const updateMeal = async (id: number, updateData:any, token:string) => {
     console.log(updateData);
     
@@ -97,7 +107,7 @@ const Meals = (function () {
       }
     );
   }
-  return { getAllMeals,getPartnerMeals, createMeal, getMealDetail, updateMeal, deleteMeal, uploadMealImg }
+  return { getAllMeals,getPartnerMeals, createMeal, getMealDetail, updateMeal, deleteMeal, uploadMealImg, getPartnerMealDetail }
 })();
 
 export default Meals;
