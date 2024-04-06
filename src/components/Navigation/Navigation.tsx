@@ -54,10 +54,6 @@ const userNav = {
       name:"Home",
       nav:"/"
     },
-    {
-      name:"Meals",
-      nav:"/meals"
-    }
   ],
 }
 
