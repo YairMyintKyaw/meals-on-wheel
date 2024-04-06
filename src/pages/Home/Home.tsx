@@ -19,6 +19,7 @@ import Accordion, { FAQ_type } from "../../components/Accordion/Accordion";
 import Button from "../../components/Button/Button";
 import PageLayout from "../../components/Layout/PageLayout";
 import Footer from "../../components/Footer/Footer";
+import { NavLink } from "react-router-dom";
 
 const numbers: NumberData[] = [
   {
@@ -101,7 +102,7 @@ export default function Home() {
                   <p className="absolute bottom-[12.37px] right-0 text-neutral-800 text-sm font-medium">Goal: $89,000</p>
                   <span className="h-full w-[40%] bg-green-800 rounded-lg"></span>
                 </div>
-                <Button buttonType="secondary--green" className="w-fit">Donate Now</Button>
+                <NavLink to={"/payment"}><Button buttonType="secondary--green" className="w-fit">Donate Now</Button></NavLink>
               </div>
               <div className="flex-1 relative">
                 <Image Img={Nurse} width={480} height={510} object="center" className="h-full rounded-[30px] rounded-br-[38px] lg:rounded-br-[56px]" />

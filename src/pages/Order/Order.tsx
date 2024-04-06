@@ -47,10 +47,10 @@ const Order = () => {
                                     {"bg-green-800":order.is_delivered==="true"})}>
                             {
                                 order.is_delivered==="true"?"Delivered":
-                                order.is_pickup==="true"?"Delivering":
-                                order.is_finished==="true"?"Ready To Deliver":
-                                order.is_preparing==="true"?"Preparing":
-                                "Ordered meal"
+                                order.is_pickup==="true"?"On the Way":
+                                order.is_finished==="true"?"Meal Ready":
+                                order.is_preparing==="true"?"Meal Preparing":
+                                "Order Received"
                             }
                         </p>
                         
