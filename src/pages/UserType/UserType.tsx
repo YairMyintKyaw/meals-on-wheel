@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom"
-import Button from "../../components/Button/Button"
+import Button from "../../components/button/Button"
 import Img from "../../assets/images/img_logo00.png"
 
 const UserType = () => {

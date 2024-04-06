@@ -3,7 +3,7 @@ import { RootState } from "../../store/store";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Order from "../../api/order";
-import Button from "../../components/Button/Button";
+import Button from "../../components/button/Button";
 
 const HomePartner = () => {
   const nav = useNavigate();
