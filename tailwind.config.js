@@ -11,6 +11,6 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [require("tw-elements/plugin.cjs")],
 }
 
