@@ -10,6 +10,9 @@ import MealRegister from "./pages/Meals/MealRegister";
 import Payment from "./pages/Donation/Payment";
 import PaymentSuccess from  "./pages/Donation/PaymentSuccess";
 import Profile from "./pages/Profile/Profile";
+import Order from "./pages/Order/Order";
+import AboutUs from "./pages/About/AboutUs";
+import Contactus from "./pages/contactus/Contactus";
 
 const routes = () => {
     return (
@@ -26,6 +29,9 @@ const routes = () => {
                 <Route path="/meals/create" element={<MealRegister />} />
                 <Route path="/payment" element={<Payment />} />
                 <Route path="/success" element={<PaymentSuccess />} />
+                <Route path="/order" element={<Order />} />
+                <Route path="/about" element={<AboutUs />} />
+                <Route path="/contact" element={<Contactus />} />
             </Routes>
         </Suspense>
     )
