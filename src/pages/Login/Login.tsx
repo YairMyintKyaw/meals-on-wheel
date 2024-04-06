@@ -2,7 +2,7 @@ import { ObjectSchema, object, string } from "yup";
 import AuthLayout from "../../components/Layout/AuthLayout"
 import RegisterForm, { FieldConfig } from "../../components/Form/Form";
 import { Field } from "formik";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Auth from "../../api/auth";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,7 +19,7 @@ const Login = () => {
   const diapatch = useDispatch();
   const user = useSelector((state: RootState) => state.user);
   const nav = useNavigate();
-  console.log(user);
+  const {state} = useLocation();
   
   const initialValues: FormValues = {
     email: "",
@@ -55,6 +55,7 @@ const Login = () => {
     <AuthLayout title="Welcome Back">
       <p className="text-lg font-medium mb-[24px] text-neutral-500">Let's catch you up on what's happening at MerryMeal.</p>
       {isbackendError && <p className="text-lg font-medium mb-[24px] text-red-800">Email or passowrd is wrong.</p>}
+      {state && <p className="text-lg font-medium mb-[24px] text-green-800">{state.message}</p>}
       <RegisterForm
         initialValues={initialValues}
         validationSchema={validationSchema}

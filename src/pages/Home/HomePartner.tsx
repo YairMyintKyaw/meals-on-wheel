@@ -54,7 +54,7 @@ const HomePartner = () => {
                 {order.is_finished=="true"?
                   <Button buttonType="primary" className="max-w-[300px]">Finished</Button>:
                 order.is_preparing==="true"?
-                  <Button buttonType="primary" className="bg-yellow-600 max-w-[300px]" handleClick={handleFinish.bind(this, order.id)}>Finish</Button>:
+                  <Button buttonType="primary" className="bg-yellow-600 max-w-[300px]" handleClick={handleFinish.bind(this, order.id)}>Preparing</Button>:
                 <Button handleClick={handleStartPrepare.bind(this, order.id)} className="max-w-[300px]">Start Prepare</Button>}
               </div>
             </section>

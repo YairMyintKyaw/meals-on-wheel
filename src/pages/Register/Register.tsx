@@ -27,9 +27,7 @@ export const Register = () => {
       setBackendErrors(error);
       if(error["user_name"] || error["email"] || error["password"] || error["confirm_password"]) nav(`/user/register/${type}`);
     }else{
-      // dispatch()
-      console.log(response);
-      nav("/login");
+      nav("/login", {state:{message:"Your account is successfully registered"}});
     };
     
     
