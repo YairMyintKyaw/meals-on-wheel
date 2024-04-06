@@ -101,14 +101,13 @@ const Navigation = () => {
       {!type?
         <ul className=" hidden nav:flex items-center justify-center gap-[24px]">
           <li className="text-black text-[16px] font-[500] transition ease-out hover:text-green-800"><NavLink to={"/"}>Home</NavLink></li>
-          <li className="relative text-black text-[16px] font-[500] transition ease-out hover:text-green-800">
+          {/* <li className="relative text-black text-[16px] font-[500] transition ease-out hover:text-green-800">
             <button id="dropdownTakeAction" onClick={handleClick} data-dropdown-toggle="dropdown" className="flex items-center" type="button">
               Take Action
               <svg className="w-2.5 ms-1 mt-1 " aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
               </svg>
             </button>
-            {/* Dropdown menu  */}
             <div id="dropdown" className={cn("dropdown z-10 absolute top-[35px] border border-green-800 bg-white divide-y divide-neutral-500 rounded-lg shadow w-44 overflow-hidden",
               { "hidden": !isDropdownActive })}>
               <ul className=" text-sm text-green-800" aria-labelledby="dropdownTakeAction">
@@ -126,10 +125,10 @@ const Navigation = () => {
                 </li>
               </ul>
             </div>
-          </li>
+          </li> */}
           <li className="text-black text-[16px] font-[500] transition ease-out hover:text-green-800" ><NavLink to={"/about"}>About Us</NavLink></li>
           <li className="text-black text-[16px] font-[500] transition ease-out hover:text-green-800"><NavLink to={"/contact"}>Contact Us</NavLink></li>
-          <li className="text-black text-[16px] font-[500] transition ease-out hover:text-green-800"><NavLink to={"/news_and_blogs"}>News & Blogs</NavLink></li>
+          {/* <li className="text-black text-[16px] font-[500] transition ease-out hover:text-green-800"><NavLink to={"/news_and_blogs"}>News & Blogs</NavLink></li> */}
         </ul>:
         <ul className=" hidden nav:flex items-center justify-center gap-[24px]">
           {userNav[type].map((nav,index)=><li key={index} className="text-black text-[16px] font-[500] transition ease-out hover:text-green-800"><NavLink to={nav.nav}>{nav.name}</NavLink></li>)}
@@ -160,14 +159,13 @@ const Navigation = () => {
           !type?
             <ul className="flex flex-col text-start justify-center w-full">
               <li className="text-black text-[16px] font-[500] transition ease-out hover:text-green-800"><NavLink className={"block mt-4 px-4 py-4 hover:bg-green-800 hover:text-white"} to={"/"}>Home</NavLink></li>
-              <li className="relative text-black text-[16px] font-[500] transition ease-out hover:text-green-800">
+              {/* <li className="relative text-black text-[16px] font-[500] transition ease-out hover:text-green-800">
                 <button id="dropdownTakeAction" onClick={handleClick} data-dropdown-toggle="dropdown" className="flex items-center w-full px-4 py-4 hover:bg-green-800 hover:text-white" type="button">
                   Take Action
                   <svg className="w-2.5 mt-1 ms-auto" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
                   </svg>
                 </button>
-                {/* Dropdown menu  */}
                 <div id="dropdown" className={cn("dropdown z-10 bg-white border-none w-full overflow-hidden",
                   { "hidden": !isDropdownActive })}>
                   <ul className=" text-sm text-green-800" aria-labelledby="dropdownTakeAction">
@@ -185,10 +183,10 @@ const Navigation = () => {
                     </li>
                   </ul>
                 </div>
-              </li>
+              </li> */}
               <li className="text-black text-[16px] font-[500] transition ease-out hover:text-green-800" ><NavLink className="block mt-4 px-4 py-4 hover:bg-green-800 hover:text-white" to={"/about"}>About Us</NavLink></li>
               <li className="text-black text-[16px] font-[500] transition ease-out hover:text-green-800"><NavLink className="block mt-4 px-4 py-4 hover:bg-green-800 hover:text-white" to={"/contact"}>Contact Us</NavLink></li>
-              <li className="text-black text-[16px] font-[500] transition ease-out hover:text-green-800"><NavLink className="block mt-4 px-4 py-4 hover:bg-green-800 hover:text-white" to={"/news_and_blogs"}>News & Blogs</NavLink></li>
+              {/* <li className="text-black text-[16px] font-[500] transition ease-out hover:text-green-800"><NavLink className="block mt-4 px-4 py-4 hover:bg-green-800 hover:text-white" to={"/news_and_blogs"}>News & Blogs</NavLink></li> */}
             </ul>
           :
           <ul className="flex flex-col text-start justify-center w-full">
