@@ -1,7 +1,7 @@
 import clsx, { ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { ObjectSchema, object, string, ref } from "yup";
-import { FieldConfig } from "../components/Form/Form";
+import { FieldConfig } from "../components/form/Form";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
