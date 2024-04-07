@@ -9,7 +9,7 @@ interface UserData {
   csrfToken?:string
 }
 const initialState:UserData = {
-  type: "admin",
+  type: null,
   token:"", 
   user:{},
   csrfToken:""
