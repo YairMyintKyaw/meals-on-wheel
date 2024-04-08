@@ -23,7 +23,6 @@ const Button = (
                 { "mt-4 mb-8 w-full rounded-md bg-green-800 px-6 py-3 font-medium text-white hover:bg-green-900 duration-500": buttonType === "gray" },
                 { "hover:shadow-lg hover:-translate-y-1": buttonType === undefined },
                 className,
-
             )}
             onClick={handleClick}
         >

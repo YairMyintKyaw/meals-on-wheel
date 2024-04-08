@@ -3,7 +3,7 @@ import { RootState } from "../../store/store";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Order from "../../api/order";
-import Button from "../../components/button/Button";
+import Button from "../../components/Button/Button";
 
 const HomePartner = () => {
   const nav = useNavigate();
@@ -54,7 +54,7 @@ const HomePartner = () => {
                 {order.is_finished=="true"?
                   <Button buttonType="primary" className="max-w-[300px]">Finished</Button>:
                 order.is_preparing==="true"?
-                  <Button buttonType="primary" className="bg-yellow-600 max-w-[300px]" handleClick={handleFinish.bind(this, order.id)}>Finish</Button>:
+                  <Button buttonType="primary" className="bg-yellow-600 max-w-[300px]" handleClick={handleFinish.bind(this, order.id)}>Preparing</Button>:
                 <Button handleClick={handleStartPrepare.bind(this, order.id)} className="max-w-[300px]">Start Prepare</Button>}
               </div>
             </section>

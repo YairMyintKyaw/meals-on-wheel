@@ -69,6 +69,7 @@ const HomeAdmin = () => {
         const response = await User.get("member", token).catch(e=>setUsers([]));
         const profile =  response?.data.Profile;
         const users =  response?.data["member"];
+        console.log(users);
         
         if(users){
           const userData = users.map((user:any)=>{

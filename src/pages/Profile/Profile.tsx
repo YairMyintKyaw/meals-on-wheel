@@ -4,8 +4,8 @@ import { RootState } from "../../store/store";
 import { useEffect, useState } from "react";
 import User from "../../api/user";
 import { setUpForm } from "../../utils/utils";
-import RegisterForm from "../../components/form/Form";
-import Button from "../../components/button/Button";
+import RegisterForm from "../../components/Form/Form";
+import Button from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 
 function flattenObject(obj: any, parentKey = ''): { [key: string]: any } {
@@ -89,7 +89,7 @@ const Profile = () => {
             : <div>
               {Object.keys(userData).map(key => {
                 if (key != "created_at" && key != "id" && key != "image" && key != "role_as" && key != "updated_at" && key != "user_id" && key != "user_name")
-                  return <section className="mb-3 flex border-b border-b-neutral-100 py-3 flex-wrap">
+                  return <section key={userData.id} className="mb-3 flex border-b border-b-neutral-100 py-3 flex-wrap">
                     <h2 className="uppercase font-bold text-lg w-[300px]">{key}</h2>
                     <p className="text-green-800 text-lg">{userData[key]}</p>
                   </section>;

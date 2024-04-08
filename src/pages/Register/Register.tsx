@@ -1,6 +1,6 @@
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom"
 import { cn, setUpForm } from "../../utils/utils";
-import RegisterForm from "../../components/form/Form";
+import RegisterForm from "../../components/Form/Form";
 import AuthLayout from "../../components/Layout/AuthLayout";
 import { useEffect, useState } from "react";
 import Auth from "../../api/auth";
@@ -27,9 +27,7 @@ export const Register = () => {
       setBackendErrors(error);
       if(error["user_name"] || error["email"] || error["password"] || error["confirm_password"]) nav(`/user/register/${type}`);
     }else{
-      // dispatch()
-      console.log(response);
-      nav("/login");
+      nav("/login", {state:{message:"Your account is successfully registered"}});
     };
     
     

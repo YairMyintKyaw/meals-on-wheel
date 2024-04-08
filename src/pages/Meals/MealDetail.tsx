@@ -2,10 +2,10 @@ import { useNavigate, useParams } from "react-router-dom"
 import PageLayout from "../../components/Layout/PageLayout";
 import { useEffect, useState } from "react";
 import Meals, { MealsInterface } from "../../api/meal";
-import Button from "../../components/button/Button";
+import Button from "../../components/Button/Button";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
-import RegisterForm from "../../components/form/Form";
+import RegisterForm from "../../components/Form/Form";
 import { setUpForm } from "../../utils/utils";
 import Order from "../../api/order";
 
@@ -52,9 +52,6 @@ const MealDetail = () => {
       "is_delivered": values.is_delivered,
       "image": values.image
     }
-    // if(values.image){
-    //   data.image= values.image
-    // }
     console.log(data.image);
 
     if (mealData && token) {
@@ -108,12 +105,18 @@ const MealDetail = () => {
   useEffect(() => {
     (async () => {
       if (id && token) {
-        const response = await Meals.getMealDetail(parseInt(id), token);
-        setMealData(response.data.meal);
-        console.log(response.data.meal);
+        
+        if(type==="member"|| type=="caregiver"){
+           const response = await Meals.getMealDetail(parseInt(id), token);        
+           setMealData(response?.data["meal by id"])
+        }else if(type==="partner"){
+           const response = await Meals.getPartnerMealDetail(parseInt(id), token);        
+           setMealData(response?.data.data[0]);
+           
+        }
       }
     })();
-  }, [])
+  }, [type])
   return (
     <PageLayout>
       <Button buttonType="back" className="mb-5 mt-5" handleClick={handleBackToMeal}>Back</Button>
