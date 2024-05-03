@@ -1,5 +1,5 @@
 import { setUpForm } from "../../utils/utils";
-import RegisterForm from "../../components/Form/Form";
+import RegisterForm from "../../components/form/Form";
 import User, { UserType } from "../../api/user";
 
 const AccUpdate = ({data, type, token, closeEdit}:{data:any, type:UserType, token:string|null, closeEdit:any}) => {
