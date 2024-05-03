@@ -4,8 +4,8 @@ import { RootState } from "../../store/store";
 import { useEffect, useState } from "react";
 import User from "../../api/user";
 import { setUpForm } from "../../utils/utils";
-import RegisterForm from "../../components/Form/Form";
-import Button from "../../components/Button/Button";
+import RegisterForm from "../../components/form/Form";
+import Button from "../../components/button/Button";
 import { useNavigate } from "react-router-dom";
 
 function flattenObject(obj: any, parentKey = ''): { [key: string]: any } {
@@ -62,7 +62,13 @@ const Profile = () => {
       delete values.user_name;
       console.log("upload data",values);
       const response = await User.updateOwnProfile( values, id, token);
-      console.log(response);
+      if(response.status === 200) {
+        setIsEditable(false);
+        const response = await User.getOwnProfileData(token);
+        setUserData(flattenObject(response.data));
+        console.log(userData);
+        
+      }
       
     }
   }
@@ -87,9 +93,9 @@ const Profile = () => {
                 className="max-w-[500px] mx-auto mb-10"
               /> : ""
             : <div>
-              {Object.keys(userData).map(key => {
+              {Object.keys(userData).map((key,index) => {
                 if (key != "created_at" && key != "id" && key != "image" && key != "role_as" && key != "updated_at" && key != "user_id" && key != "user_name")
-                  return <section key={userData.id} className="mb-3 flex border-b border-b-neutral-100 py-3 flex-wrap">
+                  return <section key={index} className="mb-3 flex border-b border-b-neutral-100 py-3 flex-wrap">
                     <h2 className="uppercase font-bold text-lg w-[300px]">{key}</h2>
                     <p className="text-green-800 text-lg">{userData[key]}</p>
                   </section>;

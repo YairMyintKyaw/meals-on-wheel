@@ -16,7 +16,7 @@ import Hand from "../../assets/images/Top/img_hand.png"
 import Smile from "../../assets/images/Top/img_smiley.png"
 import Users from "../../assets/images/Top/img_users.png"
 import Accordion, { FAQ_type } from "../../components/Accordion/Accordion";
-import Button from "../../components/Button/Button";
+import Button from "../../components/button/Button";
 import PageLayout from "../../components/Layout/PageLayout";
 import Footer from "../../components/Footer/Footer";
 import { NavLink } from "react-router-dom";
