@@ -12,9 +12,6 @@ A full-stack app for an organization called MerryMeal. Merry Wheel is a charitab
 
 Backend Repo: https://github.com/AyeMinan/Meals_on_Wheels
 
-*I only develop the frontend, and backend is developed by others
-
-
 ## Installation
 
 Clone the repo first
